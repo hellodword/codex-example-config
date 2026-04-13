@@ -25,16 +25,18 @@
         let
           pkgs = import nixpkgs { inherit system; };
           update-config = pkgs.writeShellApplication {
-            name = "update-config";
+            name = "exe";
             runtimeInputs = with pkgs; [
               bash
               coreutils
               curl
               gnugrep
               htmlq
+              python3
             ];
             text = ''
-              exec bash ${./scripts/update-config.sh} "$@"
+              bash ${./scripts/update-config.sh}
+              python3 ${./scripts/generate-toml-from-json-schema.py}
             '';
           };
         in
@@ -45,7 +47,7 @@
       apps = forAllSystems (system: {
         default = {
           type = "app";
-          program = "${self.packages.${system}.default}/bin/update-config";
+          program = "${self.packages.${system}.default}/bin/exe";
         };
       });
     };

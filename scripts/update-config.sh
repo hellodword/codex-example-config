@@ -32,5 +32,6 @@ case "$source_url" in
 esac | htmlq --text '#mainContent > .astro-code' >"$tmp_output"
 
 grep -q '[^[:space:]]' "$tmp_output"
+sed -i '1s@^@#:schema https://developers.openai.com/codex/config-schema.json\n@' "$tmp_output"
 chmod 0644 -- "$tmp_output"
 mv -- "$tmp_output" "$output_path"
