@@ -1,0 +1,40 @@
+name: Update config.toml
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 3 * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-config-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  update-config:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ github.ref_name }}
+
+      - uses: nixbuild/nix-quick-install-action@5bb6a3b3abe66fd09bbf250dce8ada94f856a703 # v30
+        with:
+          enable_kvm: true
+
+      - run: nix run . --no-write-lock-file
+
+      - name: Commit and push config.toml
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add config.toml
+          git diff --cached --quiet && exit 0
+          git commit -m "chore: update config.toml"
+          git push origin HEAD:${{ github.ref_name }}
