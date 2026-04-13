@@ -1,3 +1,4 @@
+#:schema https://developers.openai.com/codex/config-schema.json
 # Codex example configuration (config.toml)
 #
 # This file lists the main keys Codex reads from config.toml, along with default

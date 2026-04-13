@@ -1,0 +1,1455 @@
+#:schema https://developers.openai.com/codex/config-schema.json
+# Generated from schema
+# Notes:
+# - Root keys are rendered before tables.
+# - Optional fields with unset defaults are commented out.
+# - Dynamic maps get an example child table.
+
+# Whether the model may request a login shell for shell-based tools. Default to `true`
+# 
+# If `true`, the model may request a login shell (`login = true`), and omitting `login` defaults to using a login shell. If `false`, the model can never use a login shell: `login = true` requests are rejected, and omitting `login` defaults to a non-login shell.
+# Optional; default: unset
+# allow_login_shell = false
+
+# Default approval policy for executing commands.
+# Allowed: untrusted
+# Optional; default: unset
+approval_policy = "untrusted"
+
+# Configures who approval requests are routed to for review once they have been escalated. This does not disable separate safety checks such as ARC.
+# Allowed: user | guardian_subagent
+# Optional; default: unset
+approvals_reviewer = "user"
+
+# Maximum poll window for background terminal output (`write_stdin`), in milliseconds. Default: `300000` (5 minutes).
+# Optional; default: unset
+# background_terminal_max_timeout = 0
+
+# Base URL for requests to ChatGPT (as opposed to the OpenAI API).
+# Optional; default: unset
+# chatgpt_base_url = "example"
+
+# When `true`, checks for Codex updates on startup and surfaces update prompts. Set to `false` only if your Codex updates are centrally managed. Defaults to `true`.
+# Optional; default: unset
+# check_for_update_on_startup = false
+
+# Preferred backend for storing CLI auth credentials. file (default): Use a file in the Codex home directory. keyring: Use an OS-specific keyring service. auto: Use the keyring if available, otherwise use a file.
+# Allowed: file
+# Default: None
+cli_auth_credentials_store = ""
+
+# Optional commit attribution text for commit message co-author trailers.
+# 
+# Set to an empty string to disable automatic commit attribution.
+# Optional; default: unset
+# commit_attribution = "example"
+
+# Compact prompt used for history compaction.
+# Optional; default: unset
+# compact_prompt = "example"
+
+# Default named permissions profile to apply from the `[permissions]` table.
+# Optional; default: unset
+# default_permissions = "example"
+
+# Developer instructions inserted as a `developer` role message.
+# Default: None
+developer_instructions = ""
+
+# When true, disables burst-paste detection for typed input entirely. All characters are inserted as they are received, and no buffering or placeholder replacement will occur for fast keypress bursts.
+# Optional; default: unset
+# disable_paste_burst = false
+
+# A path that is guaranteed to be absolute and normalized (though it is not guaranteed to be canonicalized or exist on the filesystem).
+# 
+# IMPORTANT: When deserializing an `AbsolutePathBuf`, a base path must be set using [AbsolutePathBufGuard::new]. If no base path is set, the deserialization will fail unless the path being deserialized is already absolute.
+# Optional; default: unset
+# experimental_compact_prompt_file = "example"
+
+# Experimental / do not use. Replaces the built-in realtime start instructions inserted into developer messages when realtime becomes active.
+# Optional; default: unset
+# experimental_realtime_start_instructions = "example"
+
+# Experimental / do not use. Overrides only the realtime conversation websocket transport instructions (the `Op::RealtimeConversation` `/ws` session.update instructions) without changing normal prompts.
+# Optional; default: unset
+# experimental_realtime_ws_backend_prompt = "example"
+
+# Experimental / do not use. Overrides only the realtime conversation websocket transport base URL (the `Op::RealtimeConversation` `/v1/realtime` connection) without changing normal provider HTTP requests.
+# Optional; default: unset
+# experimental_realtime_ws_base_url = "example"
+
+# Experimental / do not use. Selects the realtime websocket model/snapshot used for the `Op::RealtimeConversation` connection.
+# Optional; default: unset
+# experimental_realtime_ws_model = "example"
+
+# Experimental / do not use. Replaces the synthesized realtime startup context appended to websocket session instructions. An empty string disables startup context injection entirely.
+# Optional; default: unset
+# experimental_realtime_ws_startup_context = "example"
+
+# Optional; default: unset
+# experimental_use_freeform_apply_patch = false
+
+# Optional; default: unset
+# experimental_use_unified_exec_tool = false
+
+# Optional URI-based file opener. If set, citations to files in the model output will be hyperlinked using the specified URI scheme.
+# Allowed: vscode | vscode-insiders | windsurf | cursor
+# Optional; default: unset
+file_opener = "vscode"
+
+# When set, restricts ChatGPT login to a specific workspace identifier.
+# Default: None
+forced_chatgpt_workspace_id = ""
+
+# When set, restricts the login mechanism users may use.
+# Allowed: chatgpt | api
+# Default: None
+forced_login_method = ""
+
+# When set to `true`, `AgentReasoning` events will be hidden from the UI/output. Defaults to `false`.
+# Optional; default: unset
+# hide_agent_reasoning = false
+
+# Whether to inject the `<apps_instructions>` developer block.
+# Optional; default: unset
+# include_apps_instructions = false
+
+# Whether to inject the `<environment_context>` user block.
+# Optional; default: unset
+# include_environment_context = false
+
+# Whether to inject the `<permissions instructions>` developer block.
+# Optional; default: unset
+# include_permissions_instructions = false
+
+# System instructions.
+# Optional; default: unset
+# instructions = "example"
+
+# Ordered list of directories to search for Node modules in `js_repl`.
+# Optional; default: unset
+# js_repl_node_module_dirs = ["example"]
+
+# Optional absolute path to the Node runtime used by `js_repl`.
+# Optional; default: unset
+# js_repl_node_path = "example"
+
+# Directory where Codex writes log files, for example `codex-tui.log`. Defaults to `$CODEX_HOME/log`.
+# Optional; default: unset
+# log_dir = "example"
+
+# Optional fixed port for the local HTTP callback server used during MCP OAuth login. When unset, Codex will bind to an ephemeral port chosen by the OS.
+# Optional; default: unset
+# mcp_oauth_callback_port = 0
+
+# Optional redirect URI to use during MCP OAuth login. When set, this URI is used in the OAuth authorization request instead of the local listener address. The local callback listener still binds to 127.0.0.1 (using `mcp_oauth_callback_port` when provided).
+# Optional; default: unset
+# mcp_oauth_callback_url = "example"
+
+# Preferred backend for storing MCP OAuth credentials. keyring: Use an OS-specific keyring service. https://github.com/openai/codex/blob/main/codex-rs/rmcp-client/src/oauth.rs#L2 file: Use a file in the Codex home directory. auto (default): Use the OS-specific keyring service if available, otherwise use a file.
+# Allowed: auto
+# Default: None
+mcp_oauth_credentials_store = ""
+
+# Optional override of model selection.
+# Optional; default: unset
+# model = "example"
+
+# Token usage threshold triggering auto-compaction of conversation history.
+# Optional; default: unset
+# model_auto_compact_token_limit = 0
+
+# Optional path to a JSON model catalog (applied on startup only). Per-thread `config` overrides are accepted but do not reapply this (no-ops).
+# Optional; default: unset
+# model_catalog_json = "example"
+
+# Size of the context window for the model, in tokens.
+# Optional; default: unset
+# model_context_window = 0
+
+# Optional path to a file containing model instructions that will override the built-in instructions for the selected model. Users are STRONGLY DISCOURAGED from using this field, as deviating from the instructions sanctioned by Codex will likely degrade model performance.
+# Optional; default: unset
+# model_instructions_file = "example"
+
+# Provider to use from the model_providers map.
+# Optional; default: unset
+# model_provider = "example"
+
+# See https://platform.openai.com/docs/guides/reasoning?api-mode=responses#get-started-with-reasoning
+# Allowed: none | minimal | low | medium | high | xhigh
+# Optional; default: unset
+model_reasoning_effort = "none"
+
+# A summary of the reasoning performed by the model. This can be useful for debugging and understanding the model's reasoning process. See https://platform.openai.com/docs/guides/reasoning?api-mode=responses#reasoning-summaries
+# Allowed: auto | concise | detailed
+# Optional; default: unset
+model_reasoning_summary = "auto"
+
+# Override to force-enable reasoning summaries for the configured model.
+# Optional; default: unset
+# model_supports_reasoning_summaries = false
+
+# Optional verbosity control for GPT-5 models (Responses API `text.verbosity`).
+# Allowed: low | medium | high
+# Optional; default: unset
+model_verbosity = "low"
+
+# Optional external command to spawn for end-user notifications.
+# Default: None
+notify = ""
+
+# Base URL override for the built-in `openai` model provider.
+# Optional; default: unset
+# openai_base_url = "example"
+
+# Preferred OSS provider for local models, e.g. "lmstudio" or "ollama".
+# Optional; default: unset
+# oss_provider = "example"
+
+# Optionally specify a personality for the model
+# Allowed: none | friendly | pragmatic
+# Optional; default: unset
+personality = "none"
+
+# See https://platform.openai.com/docs/guides/reasoning?api-mode=responses#get-started-with-reasoning
+# Allowed: none | minimal | low | medium | high | xhigh
+# Optional; default: unset
+plan_mode_reasoning_effort = "none"
+
+# Profile to use from the `profiles` map.
+# Optional; default: unset
+# profile = "example"
+
+# Ordered list of fallback filenames to look for when AGENTS.md is missing.
+# Optional; default: unset
+# project_doc_fallback_filenames = ["example"]
+
+# Maximum number of bytes to include from an AGENTS.md project doc file.
+# Optional; default: unset
+# project_doc_max_bytes = 0
+
+# Markers used to detect the project root when searching parent directories for `.codex` folders. Defaults to [".git"] when unset.
+# Default: None
+project_root_markers = ""
+
+# Review model override used by the `/review` feature.
+# Optional; default: unset
+# review_model = "example"
+
+# Sandbox mode to use.
+# Allowed: read-only | workspace-write | danger-full-access
+# Optional; default: unset
+sandbox_mode = "read-only"
+
+# Optional explicit service tier preference for new turns (`fast` or `flex`).
+# Allowed: fast | flex
+# Optional; default: unset
+service_tier = "fast"
+
+# When set to `true`, `AgentReasoningRawContentEvent` events will be shown in the UI/output. Defaults to `false`.
+# Optional; default: unset
+# show_raw_agent_reasoning = false
+
+# Directory where Codex stores the SQLite state DB. Defaults to `$CODEX_SQLITE_HOME` when set. Otherwise uses `$CODEX_HOME`.
+# Optional; default: unset
+# sqlite_home = "example"
+
+# Suppress warnings about unstable (under development) features.
+# Optional; default: unset
+# suppress_unstable_features_warning = false
+
+# Token budget applied when storing tool/function outputs in the context manager.
+# Optional; default: unset
+# tool_output_token_limit = 0
+
+# Controls the web search tool mode: disabled, cached, or live.
+# Allowed: disabled | cached | live
+# Optional; default: unset
+web_search = "disabled"
+
+# Tracks whether the Windows onboarding screen has been acknowledged.
+# Optional; default: unset
+# windows_wsl_setup_acknowledged = false
+
+# Optional absolute path to patched zsh used by zsh-exec-bridge-backed shell execution.
+# Optional; default: unset
+# zsh_path = "example"
+
+# When `false`, disables analytics across Codex product surfaces in this machine. Defaults to `true`.
+# Optional; default: unset
+# [analytics]
+
+# # When `false`, disables analytics across Codex product surfaces in this profile.
+# # Optional; default: unset
+# # enabled = false
+#
+
+# Machine-local realtime audio device preferences used by realtime voice.
+# Default: None
+[audio]
+
+# Optional; default: unset
+# microphone = "example"
+
+# Optional; default: unset
+# speaker = "example"
+
+# Centralized feature flags (new). Prefer this over individual toggles.
+# Default: None
+[features]
+
+# Optional; default: unset
+# apply_patch_freeform = false
+
+# Optional; default: unset
+# apps = false
+
+# Optional; default: unset
+# child_agents_md = false
+
+# Optional; default: unset
+# code_mode = false
+
+# Optional; default: unset
+# code_mode_only = false
+
+# Optional; default: unset
+# codex_git_commit = false
+
+# Optional; default: unset
+# codex_hooks = false
+
+# Optional; default: unset
+# collab = false
+
+# Optional; default: unset
+# collaboration_modes = false
+
+# Optional; default: unset
+# connectors = false
+
+# Optional; default: unset
+# default_mode_request_user_input = false
+
+# Optional; default: unset
+# elevated_windows_sandbox = false
+
+# Optional; default: unset
+# enable_experimental_windows_sandbox = false
+
+# Optional; default: unset
+# enable_fanout = false
+
+# Optional; default: unset
+# enable_request_compression = false
+
+# Optional; default: unset
+# exec_permission_approvals = false
+
+# Optional; default: unset
+# experimental_use_freeform_apply_patch = false
+
+# Optional; default: unset
+# experimental_use_unified_exec_tool = false
+
+# Optional; default: unset
+# experimental_windows_sandbox = false
+
+# Optional; default: unset
+# fast_mode = false
+
+# Optional; default: unset
+# general_analytics = false
+
+# Optional; default: unset
+# guardian_approval = false
+
+# Optional; default: unset
+# image_detail_original = false
+
+# Optional; default: unset
+# image_generation = false
+
+# Optional; default: unset
+# include_apply_patch_tool = false
+
+# Optional; default: unset
+# js_repl = false
+
+# Optional; default: unset
+# js_repl_tools_only = false
+
+# Optional; default: unset
+# memories = false
+
+# Optional; default: unset
+# memory_tool = false
+
+# Optional; default: unset
+# multi_agent = false
+
+# Optional; default: unset
+# multi_agent_v2 = false
+
+# Optional; default: unset
+# personality = false
+
+# Optional; default: unset
+# plugins = false
+
+# Optional; default: unset
+# prevent_idle_sleep = false
+
+# Optional; default: unset
+# realtime_conversation = false
+
+# Optional; default: unset
+# remote_control = false
+
+# Optional; default: unset
+# remote_models = false
+
+# Optional; default: unset
+# request_permissions = false
+
+# Optional; default: unset
+# request_permissions_tool = false
+
+# Optional; default: unset
+# request_rule = false
+
+# Optional; default: unset
+# responses_websockets = false
+
+# Optional; default: unset
+# responses_websockets_v2 = false
+
+# Optional; default: unset
+# runtime_metrics = false
+
+# Optional; default: unset
+# search_tool = false
+
+# Optional; default: unset
+# shell_snapshot = false
+
+# Optional; default: unset
+# shell_tool = false
+
+# Optional; default: unset
+# shell_zsh_fork = false
+
+# Optional; default: unset
+# skill_env_var_dependency_prompt = false
+
+# Optional; default: unset
+# skill_mcp_dependency_install = false
+
+# Optional; default: unset
+# sqlite = false
+
+# Optional; default: unset
+# steer = false
+
+# Optional; default: unset
+# tool_call_mcp_elicitation = false
+
+# Optional; default: unset
+# tool_search = false
+
+# Optional; default: unset
+# tool_suggest = false
+
+# Optional; default: unset
+# tui_app_server = false
+
+# Optional; default: unset
+# undo = false
+
+# Optional; default: unset
+# unified_exec = false
+
+# Optional; default: unset
+# use_legacy_landlock = false
+
+# Optional; default: unset
+# use_linux_sandbox_bwrap = false
+
+# Optional; default: unset
+# web_search = false
+
+# Optional; default: unset
+# web_search_cached = false
+
+# Optional; default: unset
+# web_search_request = false
+
+# When `false`, disables feedback collection across Codex product surfaces. Defaults to `true`.
+# Optional; default: unset
+# [feedback]
+
+# # When `false`, disables the feedback flow across Codex product surfaces.
+# # Optional; default: unset
+# # enabled = false
+#
+
+# Settings for ghost snapshots (used for undo).
+# Default: None
+[ghost_snapshot]
+
+# Disable all ghost snapshot warning events.
+# Optional; default: unset
+# disable_warnings = false
+
+# Ignore untracked directories that contain this many files or more. (Still emits a warning unless warnings are disabled.)
+# Optional; default: unset
+# ignore_large_untracked_dirs = 0
+
+# Exclude untracked files larger than this many bytes from ghost snapshots.
+# Optional; default: unset
+# ignore_large_untracked_files = 0
+
+# Settings that govern if and what will be written to `~/.codex/history.jsonl`.
+# Default: None
+[history]
+
+# If set, the maximum size of the history file in bytes. The oldest entries are dropped once the file exceeds this limit.
+# Optional; default: unset
+# max_bytes = 0
+
+# If true, history entries will not be written to disk.
+# Allowed: save-all
+# Required
+persistence = "save-all"
+
+# Memories subsystem settings.
+# Optional; default: unset
+# [memories]
+
+# # Model used for memory consolidation.
+# # Optional; default: unset
+# # consolidation_model = "example"
+#
+# # Model used for thread summarisation.
+# # Optional; default: unset
+# # extract_model = "example"
+#
+# # When `false`, newly created threads are stored with `memory_mode = "disabled"` in the state DB.
+# # Optional; default: unset
+# # generate_memories = false
+#
+# # Maximum number of recent raw memories retained for global consolidation.
+# # Optional; default: unset
+# # max_raw_memories_for_consolidation = 0
+#
+# # Maximum age of the threads used for memories.
+# # Optional; default: unset
+# # max_rollout_age_days = 0
+#
+# # Maximum number of rollout candidates processed per pass.
+# # Optional; default: unset
+# # max_rollouts_per_startup = 0
+#
+# # Maximum number of days since a memory was last used before it becomes ineligible for phase 2 selection.
+# # Optional; default: unset
+# # max_unused_days = 0
+#
+# # Minimum idle time between last thread activity and memory creation (hours). > 12h recommended.
+# # Optional; default: unset
+# # min_rollout_idle_hours = 0
+#
+# # When `true`, web searches and MCP tool calls mark the thread `memory_mode` as `"polluted"`.
+# # Optional; default: unset
+# # no_memories_if_mcp_or_web_search = false
+#
+# # When `false`, skip injecting memory usage instructions into developer prompts.
+# # Optional; default: unset
+# # use_memories = false
+#
+
+# Collection of in-product notices (different from notifications) See [`crate::types::Notice`] for more details
+# Optional; default: unset
+# [notice]
+
+# # Tracks whether the user has acknowledged the full access warning prompt.
+# # Optional; default: unset
+# # hide_full_access_warning = false
+#
+# # Tracks whether the user has seen the gpt-5.1-codex-max migration prompt
+# # Optional; default: unset
+# # "hide_gpt-5.1-codex-max_migration_prompt" = false
+#
+# # Tracks whether the user has seen the model migration prompt
+# # Optional; default: unset
+# # hide_gpt5_1_migration_prompt = false
+#
+# # Tracks whether the user opted out of the rate limit model switch reminder.
+# # Optional; default: unset
+# # hide_rate_limit_model_nudge = false
+#
+# # Tracks whether the user has acknowledged the Windows world-writable directories warning.
+# # Optional; default: unset
+# # hide_world_writable_warning = false
+#
+# # Tracks acknowledged model migrations as old->new model slug mappings.
+# # Default: {}
+# [notice.model_migrations]
+#
+
+# OTEL configuration.
+# Optional; default: unset
+# [otel]
+
+# # Mark traces with environment (dev, staging, prod, test). Defaults to dev.
+# # Optional; default: unset
+# # environment = "example"
+#
+# # Optional log exporter
+# # Allowed: none | statsig
+# # Optional; default: unset
+# exporter = "none"
+#
+# # Log user prompt in traces
+# # Optional; default: unset
+# # log_user_prompt = false
+#
+# # Optional metrics exporter
+# # Allowed: none | statsig
+# # Optional; default: unset
+# metrics_exporter = "none"
+#
+# # Optional trace exporter
+# # Allowed: none | statsig
+# # Optional; default: unset
+# trace_exporter = "none"
+#
+
+# Named permissions profiles.
+# Default: None
+[permissions]
+
+# Experimental / do not use. Realtime websocket session selection. `version` controls v1/v2 and `type` controls conversational/transcription.
+# Default: None
+[realtime]
+
+# Allowed: webrtc | websocket
+# Optional; default: unset
+transport = "webrtc"
+
+# Allowed: conversational | transcription
+# Optional; default: unset
+type = "conversational"
+
+# Allowed: v1 | v2
+# Optional; default: unset
+version = "v1"
+
+# Allowed: alloy | arbor | ash | ballad | breeze | cedar | coral | cove | echo | ember | juniper | maple | marin | sage | shimmer | sol | spruce | vale | verse
+# Optional; default: unset
+voice = "alloy"
+
+# Sandbox configuration to apply if `sandbox` is `WorkspaceWrite`.
+# Optional; default: unset
+# [sandbox_workspace_write]
+
+# # Default: False
+# exclude_slash_tmp = false
+#
+# # Default: False
+# exclude_tmpdir_env_var = false
+#
+# # Default: False
+# network_access = false
+#
+# # Default: []
+# writable_roots = []
+#
+
+# Policy for building the `env` when spawning a process via either the `shell` or `local_shell` tool.
+# Default: {'exclude': None, 'experimental_use_profile': None, 'ignore_default_excludes': None, 'include_only': None, 'inherit': None, 'set': None}
+[shell_environment_policy]
+
+# List of regular expressions.
+# Optional; default: unset
+# exclude = ["example"]
+
+# Optional; default: unset
+# experimental_use_profile = false
+
+# Optional; default: unset
+# ignore_default_excludes = false
+
+# List of regular expressions.
+# Optional; default: unset
+# include_only = ["example"]
+
+# "Core" environment variables for the platform. On UNIX, this would include HOME, LOGNAME, PATH, SHELL, and USER, among others.
+# Allowed: core
+# Optional; default: unset
+inherit = "core"
+
+# Optional; default: unset
+[shell_environment_policy.set]
+
+# User-level skill config entries keyed by SKILL.md path.
+# Optional; default: unset
+# [skills]
+
+# # Optional; default: unset
+# # [skills.bundled]
+#
+# # # Default: True
+# # enabled = true
+# #
+#
+# # Optional; default: unset
+# [[skills.config]]
+#
+# # Required
+# enabled = false
+#
+# # Name-based selector.
+# # Optional; default: unset
+# # name = "example"
+#
+# # Path-based selector.
+# # Optional; default: unset
+# # path = "example"
+#
+#
+
+# Additional discoverable tools that can be suggested for installation.
+# Optional; default: unset
+# [tool_suggest]
+
+# # Default: []
+# [[tool_suggest.discoverables]]
+#
+# # Required
+# id = "example"
+#
+# # Allowed: connector | plugin
+# # Required
+# type = "connector"
+#
+#
+
+# Nested tools section for feature toggles
+# Optional; default: unset
+# [tools]
+
+# # Enable the `view_image` tool that lets the agent attach local images.
+# # Default: None
+# view_image = ""
+#
+# # Default: None
+# [tools.web_search]
+#
+# # Optional; default: unset
+# # allowed_domains = ["example"]
+#
+# # Allowed: low | medium | high
+# # Optional; default: unset
+# context_size = "low"
+#
+# # Optional; default: unset
+# # [tools.web_search.location]
+#
+# # # Optional; default: unset
+# # # city = "example"
+# #
+# # # Optional; default: unset
+# # # country = "example"
+# #
+# # # Optional; default: unset
+# # # region = "example"
+# #
+# # # Optional; default: unset
+# # # timezone = "example"
+# #
+#
+
+# Collection of settings that are specific to the TUI.
+# Optional; default: unset
+# [tui]
+
+# # Controls whether the TUI uses the terminal's alternate screen buffer.
+# # 
+# # - `auto` (default): Disable alternate screen in Zellij, enable elsewhere. - `always`: Always use alternate screen (original behavior). - `never`: Never use alternate screen (inline mode only, preserves scrollback).
+# # 
+# # Using alternate screen provides a cleaner fullscreen experience but prevents scrollback in terminal multiplexers like Zellij that follow the xterm spec.
+# # Allowed: auto
+# # Default: 'auto'
+# alternate_screen = "auto"
+#
+# # Enable animations (welcome screen, shimmer effects, spinners). Defaults to `true`.
+# # Default: True
+# animations = true
+#
+# # Controls whether TUI notifications are delivered only when the terminal is unfocused or regardless of focus. Defaults to `unfocused`.
+# # Allowed: unfocused
+# # Default: 'unfocused'
+# notification_condition = "unfocused"
+#
+# # Notification method to use for terminal notifications. Defaults to `auto`.
+# # Allowed: auto | osc9 | bel
+# # Default: 'auto'
+# notification_method = "auto"
+#
+# # Enable desktop notifications from the TUI. Defaults to `true`.
+# # Default: True
+# notifications = true
+#
+# # Show startup tooltips in the TUI welcome screen. Defaults to `true`.
+# # Default: True
+# show_tooltips = true
+#
+# # Ordered list of status line item identifiers.
+# # 
+# # When set, the TUI renders the selected items as the status line. When unset, the TUI defaults to: `model-with-reasoning` and `current-dir`.
+# # Default: None
+# status_line = ""
+#
+# # Ordered list of terminal title item identifiers.
+# # 
+# # When set, the TUI renders the selected items into the terminal window/tab title. When unset, the TUI defaults to: `spinner` and `project`.
+# # Default: None
+# terminal_title = ""
+#
+# # Syntax highlighting theme name (kebab-case).
+# # 
+# # When set, overrides automatic light/dark theme detection. Use `/theme` in the TUI or see `$CODEX_HOME/themes` for custom themes.
+# # Default: None
+# theme = ""
+#
+# # Startup tooltip availability NUX state persisted by the TUI.
+# # Default: {}
+# [tui.model_availability_nux]
+#
+
+# Windows-specific configuration.
+# Default: None
+[windows]
+
+# Allowed: elevated | unelevated
+# Optional; default: unset
+sandbox = "elevated"
+
+# Defaults to `true`. Set to `false` to launch the final sandboxed child process on `Winsta0\\Default` instead of a private desktop.
+# Optional; default: unset
+# sandbox_private_desktop = false
+
+# Agent-related settings (thread limits, etc.).
+# Optional; default: unset
+[agents]
+
+# Example entry
+# [agents.reviewer]
+# # Path to a role-specific config layer. Relative paths are resolved relative to the `config.toml` that defines them.
+# # Optional; default: unset
+# # config_file = "example"
+#
+# # Human-facing role documentation used in spawn tool guidance. Required unless supplied by the referenced agent role file.
+# # Optional; default: unset
+# # description = "example"
+#
+# # Candidate nicknames for agents spawned with this role.
+# # Optional; default: unset
+# # nickname_candidates = ["example"]
+#
+
+# Settings for app-specific controls.
+# Default: None
+[apps]
+
+# Example entry
+# [apps.google_drive]
+# # Approval mode for tools in this app unless a tool override exists.
+# # Allowed: auto | prompt | approve
+# # Optional; default: unset
+# default_tools_approval_mode = "auto"
+#
+# # Whether tools are enabled by default for this app.
+# # Optional; default: unset
+# # default_tools_enabled = false
+#
+# # Whether tools with `destructive_hint = true` are allowed for this app.
+# # Optional; default: unset
+# # destructive_enabled = false
+#
+# # When `false`, Codex does not surface this app.
+# # Default: True
+# enabled = true
+#
+# # Whether tools with `open_world_hint = true` are allowed for this app.
+# # Optional; default: unset
+# # open_world_enabled = false
+#
+# # Per-tool settings for this app.
+# # Optional; default: unset
+# [apps.google_drive.tools]
+#
+# # Example entry
+# # [apps.google_drive.tools."files/delete"]
+# # # Approval mode for this tool.
+# # # Allowed: auto | prompt | approve
+# # # Optional; default: unset
+# # approval_mode = "auto"
+# #
+# # # Whether this tool is enabled. `Some(true)` explicitly allows this tool.
+# # # Optional; default: unset
+# # # enabled = false
+# #
+#
+
+# Definition for MCP servers that Codex can reach out to for tool calls.
+# Default: {}
+[mcp_servers]
+
+# Example entry
+# [mcp_servers.github]
+# # Default: None
+# args = ""
+#
+# # Optional; default: unset
+# # bearer_token = "example"
+#
+# # Optional; default: unset
+# # bearer_token_env_var = "example"
+#
+# # Optional; default: unset
+# # command = "example"
+#
+# # Default: None
+# cwd = ""
+#
+# # Default: None
+# disabled_tools = ""
+#
+# # Default: None
+# enabled = ""
+#
+# # Default: None
+# enabled_tools = ""
+#
+# # Default: None
+# env_vars = ""
+#
+# # Legacy display-name field accepted for backward compatibility.
+# # Default: None
+# name = ""
+#
+# # Default: None
+# oauth_resource = ""
+#
+# # Default: None
+# required = ""
+#
+# # Default: None
+# scopes = ""
+#
+# # Default: None
+# startup_timeout_ms = ""
+#
+# # Default: None
+# startup_timeout_sec = ""
+#
+# # Default: None
+# tool_timeout_sec = ""
+#
+# # Optional; default: unset
+# # url = "example"
+#
+# # Default: None
+# [mcp_servers.github.env]
+#
+# # Default: None
+# [mcp_servers.github.env_http_headers]
+#
+# # Optional; default: unset
+# [mcp_servers.github.http_headers]
+#
+# # Default: None
+# [mcp_servers.github.tools]
+#
+# # Example entry
+# # [mcp_servers.github.tools."files/delete"]
+# # # Approval mode for this tool.
+# # # Allowed: auto | prompt | approve
+# # # Optional; default: unset
+# # approval_mode = "auto"
+# #
+#
+
+# User-defined provider entries that extend the built-in list. Built-in IDs cannot be overridden.
+# Default: {}
+[model_providers]
+
+# Example entry
+# [model_providers.azure]
+# # Base URL for the provider's OpenAI-compatible API.
+# # Optional; default: unset
+# # base_url = "example"
+#
+# # Environment variable that stores the user's API key for this provider.
+# # Optional; default: unset
+# # env_key = "example"
+#
+# # Optional instructions to help the user get a valid value for the variable and set it.
+# # Optional; default: unset
+# # env_key_instructions = "example"
+#
+# # Value to use with `Authorization: Bearer <token>` header. Use of this config is discouraged in favor of `env_key` for security reasons, but this may be necessary when using this programmatically.
+# # Optional; default: unset
+# # experimental_bearer_token = "example"
+#
+# # Friendly display name.
+# # Required
+# name = "example"
+#
+# # Maximum number of times to retry a failed HTTP request to this provider.
+# # Optional; default: unset
+# # request_max_retries = 0
+#
+# # Does this provider require an OpenAI API Key or ChatGPT login token? If true, user is presented with login screen on first run, and login preference and token/key are stored in auth.json. If false (which is the default), login screen is skipped, and API key (if needed) comes from the "env_key" environment variable.
+# # Default: False
+# requires_openai_auth = false
+#
+# # Idle timeout (in milliseconds) to wait for activity on a streaming response before treating the connection as lost.
+# # Optional; default: unset
+# # stream_idle_timeout_ms = 0
+#
+# # Number of times to retry reconnecting a dropped streaming response before failing.
+# # Optional; default: unset
+# # stream_max_retries = 0
+#
+# # Whether this provider supports the Responses API WebSocket transport.
+# # Default: False
+# supports_websockets = false
+#
+# # Maximum time (in milliseconds) to wait for a websocket connection attempt before treating it as failed.
+# # Optional; default: unset
+# # websocket_connect_timeout_ms = 0
+#
+# # Which wire protocol this provider expects.
+# # Allowed: responses
+# # Default: 'responses'
+# wire_api = "responses"
+#
+# # Command-backed bearer-token configuration for this provider.
+# # Optional; default: unset
+# # [model_providers.azure.auth]
+#
+# # # Command arguments.
+# # # Default: []
+# # args = []
+# #
+# # # Command to execute. Bare names are resolved via `PATH`; paths are resolved against `cwd`.
+# # # Required
+# # command = "example"
+# #
+# # # Working directory used when running the token command.
+# # # Optional; default: unset
+# # # cwd = "example"
+# #
+# # # Maximum age for the cached token before rerunning the command. Set to `0` to disable proactive refresh and only rerun after a 401 retry path.
+# # # Default: 300000
+# # refresh_interval_ms = 300000
+# #
+# # # Maximum time to wait for the token command to exit successfully.
+# # # Default: 5000
+# # timeout_ms = 5000
+# #
+#
+# # Optional HTTP headers to include in requests to this provider where the (key, value) pairs are the header name and _environment variable_ whose value should be used. If the environment variable is not set, or the value is empty, the header will not be included in the request.
+# # Optional; default: unset
+# [model_providers.azure.env_http_headers]
+#
+# # Additional HTTP headers to include in requests to this provider where the (key, value) pairs are the header name and value.
+# # Optional; default: unset
+# [model_providers.azure.http_headers]
+#
+# # Optional query parameters to append to the base URL.
+# # Optional; default: unset
+# [model_providers.azure.query_params]
+#
+
+# User-level plugin config entries keyed by plugin name.
+# Default: {}
+[plugins]
+
+# Example entry
+# [plugins.example]
+# # Default: True
+# enabled = true
+#
+
+# Named profiles to facilitate switching between different configurations.
+# Default: {}
+[profiles]
+
+# Example entry
+# [profiles.default]
+# # Determines the conditions under which the user is consulted to approve running the command proposed by Codex.
+# # Allowed: untrusted
+# # Optional; default: unset
+# approval_policy = "untrusted"
+#
+# # Configures who approval requests are routed to for review. Examples include sandbox escapes, blocked network access, MCP approval prompts, and ARC escalations. Defaults to `user`. `guardian_subagent` uses a carefully prompted subagent to gather relevant context and apply a risk-based decision framework before approving or denying the request.
+# # Allowed: user | guardian_subagent
+# # Optional; default: unset
+# approvals_reviewer = "user"
+#
+# # Optional; default: unset
+# # chatgpt_base_url = "example"
+#
+# # A path that is guaranteed to be absolute and normalized (though it is not guaranteed to be canonicalized or exist on the filesystem).
+# # 
+# # IMPORTANT: When deserializing an `AbsolutePathBuf`, a base path must be set using [AbsolutePathBufGuard::new]. If no base path is set, the deserialization will fail unless the path being deserialized is already absolute.
+# # Optional; default: unset
+# # experimental_compact_prompt_file = "example"
+#
+# # Optional; default: unset
+# # experimental_use_freeform_apply_patch = false
+#
+# # Optional; default: unset
+# # experimental_use_unified_exec_tool = false
+#
+# # Optional; default: unset
+# # include_apply_patch_tool = false
+#
+# # Optional; default: unset
+# # include_apps_instructions = false
+#
+# # Optional; default: unset
+# # include_environment_context = false
+#
+# # Optional; default: unset
+# # include_permissions_instructions = false
+#
+# # Ordered list of directories to search for Node modules in `js_repl`.
+# # Optional; default: unset
+# # js_repl_node_module_dirs = ["example"]
+#
+# # A path that is guaranteed to be absolute and normalized (though it is not guaranteed to be canonicalized or exist on the filesystem).
+# # 
+# # IMPORTANT: When deserializing an `AbsolutePathBuf`, a base path must be set using [AbsolutePathBufGuard::new]. If no base path is set, the deserialization will fail unless the path being deserialized is already absolute.
+# # Optional; default: unset
+# # js_repl_node_path = "example"
+#
+# # Optional; default: unset
+# # model = "example"
+#
+# # Optional path to a JSON model catalog (applied on startup only).
+# # Optional; default: unset
+# # model_catalog_json = "example"
+#
+# # Optional path to a file containing model instructions.
+# # Optional; default: unset
+# # model_instructions_file = "example"
+#
+# # The key in the `model_providers` map identifying the [`ModelProviderInfo`] to use.
+# # Optional; default: unset
+# # model_provider = "example"
+#
+# # See https://platform.openai.com/docs/guides/reasoning?api-mode=responses#get-started-with-reasoning
+# # Allowed: none | minimal | low | medium | high | xhigh
+# # Optional; default: unset
+# model_reasoning_effort = "none"
+#
+# # A summary of the reasoning performed by the model. This can be useful for debugging and understanding the model's reasoning process. See https://platform.openai.com/docs/guides/reasoning?api-mode=responses#reasoning-summaries
+# # Allowed: auto | concise | detailed
+# # Optional; default: unset
+# model_reasoning_summary = "auto"
+#
+# # Controls output length/detail on GPT-5 models via the Responses API. Serialized with lowercase values to match the OpenAI API.
+# # Allowed: low | medium | high
+# # Optional; default: unset
+# model_verbosity = "low"
+#
+# # Optional; default: unset
+# # oss_provider = "example"
+#
+# # Allowed: none | friendly | pragmatic
+# # Optional; default: unset
+# personality = "none"
+#
+# # See https://platform.openai.com/docs/guides/reasoning?api-mode=responses#get-started-with-reasoning
+# # Allowed: none | minimal | low | medium | high | xhigh
+# # Optional; default: unset
+# plan_mode_reasoning_effort = "none"
+#
+# # Allowed: read-only | workspace-write | danger-full-access
+# # Optional; default: unset
+# sandbox_mode = "read-only"
+#
+# # Allowed: fast | flex
+# # Optional; default: unset
+# service_tier = "fast"
+#
+# # Optional; default: unset
+# # tools_view_image = false
+#
+# # Allowed: disabled | cached | live
+# # Optional; default: unset
+# web_search = "disabled"
+#
+# # Optional absolute path to patched zsh used by zsh-exec-bridge-backed shell execution.
+# # Optional; default: unset
+# # zsh_path = "example"
+#
+# # Analytics settings loaded from config.toml. Fields are optional so we can apply defaults.
+# # Optional; default: unset
+# # [profiles.default.analytics]
+#
+# # # When `false`, disables analytics across Codex product surfaces in this profile.
+# # # Optional; default: unset
+# # # enabled = false
+# #
+#
+# # Optional feature toggles scoped to this profile.
+# # Default: None
+# [profiles.default.features]
+#
+# # Optional; default: unset
+# # apply_patch_freeform = false
+#
+# # Optional; default: unset
+# # apps = false
+#
+# # Optional; default: unset
+# # child_agents_md = false
+#
+# # Optional; default: unset
+# # code_mode = false
+#
+# # Optional; default: unset
+# # code_mode_only = false
+#
+# # Optional; default: unset
+# # codex_git_commit = false
+#
+# # Optional; default: unset
+# # codex_hooks = false
+#
+# # Optional; default: unset
+# # collab = false
+#
+# # Optional; default: unset
+# # collaboration_modes = false
+#
+# # Optional; default: unset
+# # connectors = false
+#
+# # Optional; default: unset
+# # default_mode_request_user_input = false
+#
+# # Optional; default: unset
+# # elevated_windows_sandbox = false
+#
+# # Optional; default: unset
+# # enable_experimental_windows_sandbox = false
+#
+# # Optional; default: unset
+# # enable_fanout = false
+#
+# # Optional; default: unset
+# # enable_request_compression = false
+#
+# # Optional; default: unset
+# # exec_permission_approvals = false
+#
+# # Optional; default: unset
+# # experimental_use_freeform_apply_patch = false
+#
+# # Optional; default: unset
+# # experimental_use_unified_exec_tool = false
+#
+# # Optional; default: unset
+# # experimental_windows_sandbox = false
+#
+# # Optional; default: unset
+# # fast_mode = false
+#
+# # Optional; default: unset
+# # general_analytics = false
+#
+# # Optional; default: unset
+# # guardian_approval = false
+#
+# # Optional; default: unset
+# # image_detail_original = false
+#
+# # Optional; default: unset
+# # image_generation = false
+#
+# # Optional; default: unset
+# # include_apply_patch_tool = false
+#
+# # Optional; default: unset
+# # js_repl = false
+#
+# # Optional; default: unset
+# # js_repl_tools_only = false
+#
+# # Optional; default: unset
+# # memories = false
+#
+# # Optional; default: unset
+# # memory_tool = false
+#
+# # Optional; default: unset
+# # multi_agent = false
+#
+# # Optional; default: unset
+# # multi_agent_v2 = false
+#
+# # Optional; default: unset
+# # personality = false
+#
+# # Optional; default: unset
+# # plugins = false
+#
+# # Optional; default: unset
+# # prevent_idle_sleep = false
+#
+# # Optional; default: unset
+# # realtime_conversation = false
+#
+# # Optional; default: unset
+# # remote_control = false
+#
+# # Optional; default: unset
+# # remote_models = false
+#
+# # Optional; default: unset
+# # request_permissions = false
+#
+# # Optional; default: unset
+# # request_permissions_tool = false
+#
+# # Optional; default: unset
+# # request_rule = false
+#
+# # Optional; default: unset
+# # responses_websockets = false
+#
+# # Optional; default: unset
+# # responses_websockets_v2 = false
+#
+# # Optional; default: unset
+# # runtime_metrics = false
+#
+# # Optional; default: unset
+# # search_tool = false
+#
+# # Optional; default: unset
+# # shell_snapshot = false
+#
+# # Optional; default: unset
+# # shell_tool = false
+#
+# # Optional; default: unset
+# # shell_zsh_fork = false
+#
+# # Optional; default: unset
+# # skill_env_var_dependency_prompt = false
+#
+# # Optional; default: unset
+# # skill_mcp_dependency_install = false
+#
+# # Optional; default: unset
+# # sqlite = false
+#
+# # Optional; default: unset
+# # steer = false
+#
+# # Optional; default: unset
+# # tool_call_mcp_elicitation = false
+#
+# # Optional; default: unset
+# # tool_search = false
+#
+# # Optional; default: unset
+# # tool_suggest = false
+#
+# # Optional; default: unset
+# # tui_app_server = false
+#
+# # Optional; default: unset
+# # undo = false
+#
+# # Optional; default: unset
+# # unified_exec = false
+#
+# # Optional; default: unset
+# # use_legacy_landlock = false
+#
+# # Optional; default: unset
+# # use_linux_sandbox_bwrap = false
+#
+# # Optional; default: unset
+# # web_search = false
+#
+# # Optional; default: unset
+# # web_search_cached = false
+#
+# # Optional; default: unset
+# # web_search_request = false
+#
+# # Optional; default: unset
+# # [profiles.default.tools]
+#
+# # # Enable the `view_image` tool that lets the agent attach local images.
+# # # Default: None
+# # view_image = ""
+# #
+# # # Default: None
+# # [profiles.default.tools.web_search]
+# #
+# # # Optional; default: unset
+# # # allowed_domains = ["example"]
+# #
+# # # Allowed: low | medium | high
+# # # Optional; default: unset
+# # context_size = "low"
+# #
+# # # Optional; default: unset
+# # # [profiles.default.tools.web_search.location]
+# #
+# # # # Optional; default: unset
+# # # # city = "example"
+# # #
+# # # # Optional; default: unset
+# # # # country = "example"
+# # #
+# # # # Optional; default: unset
+# # # # region = "example"
+# # #
+# # # # Optional; default: unset
+# # # # timezone = "example"
+# # #
+# #
+#
+# # Default: None
+# [profiles.default.windows]
+#
+# # Allowed: elevated | unelevated
+# # Optional; default: unset
+# sandbox = "elevated"
+#
+# # Defaults to `true`. Set to `false` to launch the final sandboxed child process on `Winsta0\\Default` instead of a private desktop.
+# # Optional; default: unset
+# # sandbox_private_desktop = false
+#
+
+# Optional; default: unset
+[projects]
+
+# Example entry
+# [projects."/absolute/path/to/project"]
+# # Represents the trust level for a project directory. This determines the approval policy and sandbox mode applied.
+# # Allowed: trusted | untrusted
+# # Optional; default: unset
+# trust_level = "trusted"
+#
