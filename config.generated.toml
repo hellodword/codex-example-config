@@ -452,6 +452,9 @@ web_search = "disabled"
 # steer = false
 
 # Optional; default: unset
+# telepathy = false
+
+# Optional; default: unset
 # tool_call_mcp_elicitation = false
 
 # Optional; default: unset
@@ -470,6 +473,9 @@ web_search = "disabled"
 # unified_exec = false
 
 # Optional; default: unset
+# use_agent_identity = false
+
+# Optional; default: unset
 # use_legacy_landlock = false
 
 # Optional; default: unset
@@ -483,6 +489,9 @@ web_search = "disabled"
 
 # Optional; default: unset
 # web_search_request = false
+
+# Optional; default: unset
+# workspace_dependencies = false
 
 # When `false`, disables feedback collection across Codex product surfaces. Defaults to `true`.
 # Optional; default: unset
@@ -902,6 +911,34 @@ sandbox = "elevated"
 # #
 #
 
+# User-level marketplace entries keyed by marketplace name.
+# Default: {}
+[marketplaces]
+
+# Example entry
+# [marketplaces.example]
+# # Last time Codex successfully added or refreshed this marketplace.
+# # Default: None
+# last_updated = ""
+#
+# # Git ref to check out when `source_type` is `git`.
+# # Default: None
+# ref = ""
+#
+# # Source location used when the marketplace was added.
+# # Default: None
+# source = ""
+#
+# # Source kind used to install this marketplace.
+# # Allowed: git | local
+# # Default: None
+# source_type = ""
+#
+# # Sparse checkout paths used when `source_type` is `git`.
+# # Default: None
+# sparse_paths = ""
+#
+
 # Definition for MCP servers that Codex can reach out to for tool calls.
 # Default: {}
 [mcp_servers]
@@ -953,6 +990,9 @@ sandbox = "elevated"
 #
 # # Default: None
 # startup_timeout_sec = ""
+#
+# # Default: None
+# supports_parallel_tool_calls = ""
 #
 # # Default: None
 # tool_timeout_sec = ""
@@ -1365,6 +1405,9 @@ sandbox = "elevated"
 # # steer = false
 #
 # # Optional; default: unset
+# # telepathy = false
+#
+# # Optional; default: unset
 # # tool_call_mcp_elicitation = false
 #
 # # Optional; default: unset
@@ -1383,6 +1426,9 @@ sandbox = "elevated"
 # # unified_exec = false
 #
 # # Optional; default: unset
+# # use_agent_identity = false
+#
+# # Optional; default: unset
 # # use_legacy_landlock = false
 #
 # # Optional; default: unset
@@ -1396,6 +1442,9 @@ sandbox = "elevated"
 #
 # # Optional; default: unset
 # # web_search_request = false
+#
+# # Optional; default: unset
+# # workspace_dependencies = false
 #
 # # Optional; default: unset
 # # [profiles.default.tools]
