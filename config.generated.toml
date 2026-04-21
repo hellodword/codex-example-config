@@ -302,10 +302,16 @@ web_search = "disabled"
 # apply_patch_freeform = false
 
 # Optional; default: unset
+# apply_patch_streaming_events = false
+
+# Optional; default: unset
 # apps = false
 
 # Optional; default: unset
 # child_agents_md = false
+
+# Optional; default: unset
+# chronicle = false
 
 # Optional; default: unset
 # code_mode = false
@@ -354,6 +360,9 @@ web_search = "disabled"
 
 # Optional; default: unset
 # experimental_windows_sandbox = false
+
+# Optional; default: unset
+# external_migration = false
 
 # Optional; default: unset
 # fast_mode = false
@@ -461,10 +470,16 @@ web_search = "disabled"
 # tool_search = false
 
 # Optional; default: unset
+# tool_search_always_defer_mcp_tools = false
+
+# Optional; default: unset
 # tool_suggest = false
 
 # Optional; default: unset
 # tui_app_server = false
+
+# Optional; default: unset
+# unavailable_dummy_tools = false
 
 # Optional; default: unset
 # undo = false
@@ -492,6 +507,9 @@ web_search = "disabled"
 
 # Optional; default: unset
 # workspace_dependencies = false
+
+# Optional; default: unset
+# workspace_owner_usage_nudge = false
 
 # When `false`, disables feedback collection across Codex product surfaces. Defaults to `true`.
 # Optional; default: unset
@@ -539,6 +557,10 @@ persistence = "save-all"
 # # Optional; default: unset
 # # consolidation_model = "example"
 #
+# # When `true`, external context sources mark the thread `memory_mode` as `"polluted"`.
+# # Optional; default: unset
+# # disable_on_external_context = false
+#
 # # Model used for thread summarisation.
 # # Optional; default: unset
 # # extract_model = "example"
@@ -566,10 +588,6 @@ persistence = "save-all"
 # # Minimum idle time between last thread activity and memory creation (hours). > 12h recommended.
 # # Optional; default: unset
 # # min_rollout_idle_hours = 0
-#
-# # When `true`, web searches and MCP tool calls mark the thread `memory_mode` as `"polluted"`.
-# # Optional; default: unset
-# # no_memories_if_mcp_or_web_search = false
 #
 # # When `false`, skip injecting memory usage instructions into developer prompts.
 # # Optional; default: unset
@@ -599,6 +617,26 @@ persistence = "save-all"
 # # Tracks whether the user has acknowledged the Windows world-writable directories warning.
 # # Optional; default: unset
 # # hide_world_writable_warning = false
+#
+# # Tracks scopes where external config migration prompts should be suppressed.
+# # Default: {'home': None, 'home_last_prompted_at': None, 'project_last_prompted_at': {}, 'projects': {}}
+# [notice.external_config_migration_prompts]
+#
+# # Tracks whether home-level external config migration prompts are hidden.
+# # Optional; default: unset
+# # home = false
+#
+# # Tracks the last time the home-level external config migration prompt was shown.
+# # Optional; default: unset
+# # home_last_prompted_at = 0
+#
+# # Tracks the last time a project-level external config migration prompt was shown.
+# # Default: {}
+# [notice.external_config_migration_prompts.project_last_prompted_at]
+#
+# # Tracks which project paths have opted out of external config migration prompts.
+# # Default: {}
+# [notice.external_config_migration_prompts.projects]
 #
 # # Tracks acknowledged model migrations as old->new model slug mappings.
 # # Default: {}
@@ -704,6 +742,10 @@ inherit = "core"
 # Optional; default: unset
 # [skills]
 
+# # Whether turns receive the automatic skills instructions block.
+# # Optional; default: unset
+# # include_instructions = false
+#
 # # Optional; default: unset
 # # [skills.bundled]
 #
@@ -917,6 +959,10 @@ sandbox = "elevated"
 
 # Example entry
 # [marketplaces.example]
+# # Git revision Codex last successfully activated for this marketplace.
+# # Default: None
+# last_revision = ""
+#
 # # Last time Codex successfully added or refreshed this marketplace.
 # # Default: None
 # last_updated = ""
@@ -960,6 +1006,10 @@ sandbox = "elevated"
 # # Default: None
 # cwd = ""
 #
+# # Allowed: auto | prompt | approve
+# # Default: None
+# default_tools_approval_mode = ""
+#
 # # Default: None
 # disabled_tools = ""
 #
@@ -971,6 +1021,9 @@ sandbox = "elevated"
 #
 # # Default: None
 # env_vars = ""
+#
+# # Default: None
+# experimental_environment = ""
 #
 # # Legacy display-name field accepted for backward compatibility.
 # # Default: None
@@ -1255,10 +1308,16 @@ sandbox = "elevated"
 # # apply_patch_freeform = false
 #
 # # Optional; default: unset
+# # apply_patch_streaming_events = false
+#
+# # Optional; default: unset
 # # apps = false
 #
 # # Optional; default: unset
 # # child_agents_md = false
+#
+# # Optional; default: unset
+# # chronicle = false
 #
 # # Optional; default: unset
 # # code_mode = false
@@ -1307,6 +1366,9 @@ sandbox = "elevated"
 #
 # # Optional; default: unset
 # # experimental_windows_sandbox = false
+#
+# # Optional; default: unset
+# # external_migration = false
 #
 # # Optional; default: unset
 # # fast_mode = false
@@ -1414,10 +1476,16 @@ sandbox = "elevated"
 # # tool_search = false
 #
 # # Optional; default: unset
+# # tool_search_always_defer_mcp_tools = false
+#
+# # Optional; default: unset
 # # tool_suggest = false
 #
 # # Optional; default: unset
 # # tui_app_server = false
+#
+# # Optional; default: unset
+# # unavailable_dummy_tools = false
 #
 # # Optional; default: unset
 # # undo = false
@@ -1445,6 +1513,9 @@ sandbox = "elevated"
 #
 # # Optional; default: unset
 # # workspace_dependencies = false
+#
+# # Optional; default: unset
+# # workspace_owner_usage_nudge = false
 #
 # # Optional; default: unset
 # # [profiles.default.tools]
