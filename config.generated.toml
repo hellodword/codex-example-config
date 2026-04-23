@@ -86,6 +86,10 @@ developer_instructions = ""
 # Optional; default: unset
 # experimental_realtime_ws_startup_context = "example"
 
+# Experimental / do not use. When set, app-server uses a remote thread store at this endpoint instead of the local filesystem/SQLite store.
+# Optional; default: unset
+# experimental_thread_store_endpoint = "example"
+
 # Optional; default: unset
 # experimental_use_freeform_apply_patch = false
 
@@ -1097,8 +1101,8 @@ sandbox = "elevated"
 # # experimental_bearer_token = "example"
 #
 # # Friendly display name.
-# # Required
-# name = "example"
+# # Default: ''
+# name = ""
 #
 # # Maximum number of times to retry a failed HTTP request to this provider.
 # # Optional; default: unset
@@ -1152,6 +1156,15 @@ sandbox = "elevated"
 # # # Maximum time to wait for the token command to exit successfully.
 # # # Default: 5000
 # # timeout_ms = 5000
+# #
+#
+# # AWS SigV4 auth configuration for this provider.
+# # Optional; default: unset
+# # [model_providers.azure.aws]
+#
+# # # AWS profile name to use. When unset, the AWS SDK default chain decides.
+# # # Optional; default: unset
+# # # profile = "example"
 # #
 #
 # # Optional HTTP headers to include in requests to this provider where the (key, value) pairs are the header name and _environment variable_ whose value should be used. If the environment variable is not set, or the value is empty, the header will not be included in the request.
