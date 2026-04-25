@@ -86,6 +86,10 @@ developer_instructions = ""
 # Optional; default: unset
 # experimental_realtime_ws_startup_context = "example"
 
+# Experimental / do not use. When set, app-server fetches thread-scoped config from a remote service at this endpoint.
+# Optional; default: unset
+# experimental_thread_config_endpoint = "example"
+
 # Experimental / do not use. When set, app-server uses a remote thread store at this endpoint instead of the local filesystem/SQLite store.
 # Optional; default: unset
 # experimental_thread_store_endpoint = "example"
@@ -1185,9 +1189,6 @@ sandbox = "elevated"
 # [mcp_servers.github]
 # # Default: None
 # args = ""
-#
-# # Optional; default: unset
-# # bearer_token = "example"
 #
 # # Optional; default: unset
 # # bearer_token_env_var = "example"
