@@ -48,7 +48,7 @@ cli_auth_credentials_store = ""
 # Optional; default: unset
 # compact_prompt = "example"
 
-# Default named permissions profile to apply from the `[permissions]` table.
+# Default permissions profile to apply. Names starting with `:` refer to built-in profiles; other names are resolved from the `[permissions]` table.
 # Optional; default: unset
 # default_permissions = "example"
 
@@ -133,14 +133,6 @@ forced_login_method = ""
 # System instructions.
 # Optional; default: unset
 # instructions = "example"
-
-# Ordered list of directories to search for Node modules in `js_repl`.
-# Optional; default: unset
-# js_repl_node_module_dirs = ["example"]
-
-# Optional absolute path to the Node runtime used by `js_repl`.
-# Optional; default: unset
-# js_repl_node_path = "example"
 
 # Directory where Codex writes log files, for example `codex-tui.log`. Defaults to `$CODEX_HOME/log`.
 # Optional; default: unset
@@ -310,6 +302,15 @@ web_search = "disabled"
 # Optional; default: unset
 # policy = "example"
 
+# Experimental / do not use. Selects the thread store implementation.
+# Optional; default: unset
+# [experimental_thread_store]
+
+# # Allowed: local
+# # Required
+# type = "local"
+#
+
 # Centralized feature flags (new). Prefer this over individual toggles.
 # Default: None
 [features]
@@ -322,6 +323,9 @@ web_search = "disabled"
 
 # Optional; default: unset
 # apps = false
+
+# Optional; default: unset
+# apps_mcp_path_override = false
 
 # Optional; default: unset
 # browser_use = false
@@ -369,6 +373,9 @@ web_search = "disabled"
 # enable_fanout = false
 
 # Optional; default: unset
+# enable_mcp_apps = false
+
+# Optional; default: unset
 # enable_request_compression = false
 
 # Optional; default: unset
@@ -390,7 +397,7 @@ web_search = "disabled"
 # fast_mode = false
 
 # Optional; default: unset
-# general_analytics = false
+# goals = false
 
 # Optional; default: unset
 # guardian_approval = false
@@ -427,6 +434,9 @@ web_search = "disabled"
 
 # Optional; default: unset
 # personality = false
+
+# Optional; default: unset
+# plugin_hooks = false
 
 # Optional; default: unset
 # plugins = false
@@ -492,6 +502,9 @@ web_search = "disabled"
 # telepathy = false
 
 # Optional; default: unset
+# terminal_resize_reflow = false
+
+# Optional; default: unset
 # tool_call_mcp_elicitation = false
 
 # Optional; default: unset
@@ -545,19 +558,19 @@ web_search = "disabled"
 # # enabled = false
 #
 
-# Settings for ghost snapshots (used for undo).
+# Compatibility-only settings retained so legacy `ghost_snapshot` config still loads.
 # Default: None
 [ghost_snapshot]
 
-# Disable all ghost snapshot warning events.
+# Legacy no-op setting retained for compatibility.
 # Optional; default: unset
 # disable_warnings = false
 
-# Ignore untracked directories that contain this many files or more. (Still emits a warning unless warnings are disabled.)
+# Legacy no-op setting retained for compatibility.
 # Optional; default: unset
 # ignore_large_untracked_dirs = 0
 
-# Exclude untracked files larger than this many bytes from ghost snapshots.
+# Legacy no-op setting retained for compatibility.
 # Optional; default: unset
 # ignore_large_untracked_files = 0
 
@@ -574,10 +587,19 @@ web_search = "disabled"
 # Required
 persistence = "save-all"
 
-# Lifecycle hooks configured inline in TOML.
+# Lifecycle hooks configured inline in TOML plus user-level overrides.
 # Optional; default: unset
 # [hooks]
 
+# # Optional; default: unset
+# [hooks.state]
+#
+# # Example entry
+# # [hooks.state.example]
+# # # Optional; default: unset
+# # # enabled = false
+# #
+#
 # # Default: []
 # [[hooks.PermissionRequest]]
 #
@@ -777,6 +799,10 @@ persistence = "save-all"
 # # Optional; default: unset
 # # max_unused_days = 0
 #
+# # Minimum remaining percentage required in Codex rate-limit windows before memory startup runs.
+# # Optional; default: unset
+# # min_rate_limit_remaining_percent = 0
+#
 # # Minimum idle time between last thread activity and memory creation (hours). > 12h recommended.
 # # Optional; default: unset
 # # min_rollout_idle_hours = 0
@@ -970,6 +996,17 @@ inherit = "core"
 # [tool_suggest]
 
 # # Default: []
+# [[tool_suggest.disabled_tools]]
+#
+# # Required
+# id = "example"
+#
+# # Allowed: connector | plugin
+# # Required
+# type = "connector"
+#
+#
+# # Default: []
 # [[tool_suggest.discoverables]]
 #
 # # Required
@@ -1057,9 +1094,13 @@ inherit = "core"
 # # Default: None
 # status_line = ""
 #
+# # Trim terminal resize-reflow replay to the most recent rendered terminal rows when the transcript exceeds this cap. Omit to use Codex's terminal-specific default. Set to `0` to keep all rendered rows.
+# # Default: None
+# terminal_resize_reflow_max_rows = ""
+#
 # # Ordered list of terminal title item identifiers.
 # # 
-# # When set, the TUI renders the selected items into the terminal window/tab title. When unset, the TUI defaults to: `spinner` and `project`.
+# # When set, the TUI renders the selected items into the terminal window/tab title. When unset, the TUI defaults to: `activity` and `project`. The `activity` item spins while working and shows an action-required message when blocked on the user.
 # # Default: None
 # terminal_title = ""
 #
@@ -1068,6 +1109,252 @@ inherit = "core"
 # # When set, overrides automatic light/dark theme detection. Use `/theme` in the TUI or see `$CODEX_HOME/themes` for custom themes.
 # # Default: None
 # theme = ""
+#
+# # Keybinding overrides for the TUI.
+# # 
+# # This supports rebinding selected actions globally and by context. Context bindings take precedence over `global` bindings.
+# # Default: {'approval': {'approve': None, 'approve_for_prefix': None, 'approve_for_session': None, 'cancel': None, 'decline': None, 'deny': None, 'open_fullscreen': None, 'open_thread': None}, 'chat': {'decrease_reasoning_effort': None, 'edit_queued_message': None, 'increase_reasoning_effort': None}, 'composer': {'history_search_next': None, 'history_search_previous': None, 'queue': None, 'submit': None, 'toggle_shortcuts': None}, 'editor': {'delete_backward': None, 'delete_backward_word': None, 'delete_forward': None, 'delete_forward_word': None, 'insert_newline': None, 'kill_line_end': None, 'kill_line_start': None, 'move_down': None, 'move_left': None, 'move_line_end': None, 'move_line_start': None, 'move_right': None, 'move_up': None, 'move_word_left': None, 'move_word_right': None, 'yank': None}, 'global': {'clear_terminal': None, 'copy': None, 'open_external_editor': None, 'open_transcript': None, 'queue': None, 'submit': None, 'toggle_shortcuts': None}, 'list': {'accept': None, 'cancel': None, 'move_down': None, 'move_up': None}, 'pager': {'close': None, 'close_transcript': None, 'half_page_down': None, 'half_page_up': None, 'jump_bottom': None, 'jump_top': None, 'page_down': None, 'page_up': None, 'scroll_down': None, 'scroll_up': None}}
+# [tui.keymap]
+#
+# # Approval overlay keybindings.
+# # Default: {'approve': None, 'approve_for_prefix': None, 'approve_for_session': None, 'cancel': None, 'decline': None, 'deny': None, 'open_fullscreen': None, 'open_thread': None}
+# [tui.keymap.approval]
+#
+# # Approve the primary option.
+# # Optional; default: unset
+# # approve = "example"
+#
+# # Approve with exec-policy prefix when that option exists.
+# # Optional; default: unset
+# # approve_for_prefix = "example"
+#
+# # Approve for session when that option exists.
+# # Optional; default: unset
+# # approve_for_session = "example"
+#
+# # Cancel an elicitation request.
+# # Optional; default: unset
+# # cancel = "example"
+#
+# # Decline and provide corrective guidance.
+# # Optional; default: unset
+# # decline = "example"
+#
+# # Deny without providing follow-up guidance.
+# # Optional; default: unset
+# # deny = "example"
+#
+# # Open the full-screen approval details view.
+# # Optional; default: unset
+# # open_fullscreen = "example"
+#
+# # Open the thread that requested approval when shown from another thread.
+# # Optional; default: unset
+# # open_thread = "example"
+#
+# # Chat context keybindings.
+# # Default: {'decrease_reasoning_effort': None, 'edit_queued_message': None, 'increase_reasoning_effort': None}
+# [tui.keymap.chat]
+#
+# # Decrease the active reasoning effort.
+# # Optional; default: unset
+# # decrease_reasoning_effort = "example"
+#
+# # Edit the most recently queued message.
+# # Optional; default: unset
+# # edit_queued_message = "example"
+#
+# # Increase the active reasoning effort.
+# # Optional; default: unset
+# # increase_reasoning_effort = "example"
+#
+# # Composer context keybindings. These override corresponding `global` actions.
+# # Default: {'history_search_next': None, 'history_search_previous': None, 'queue': None, 'submit': None, 'toggle_shortcuts': None}
+# [tui.keymap.composer]
+#
+# # Move to the next match in reverse history search.
+# # Optional; default: unset
+# # history_search_next = "example"
+#
+# # Open reverse history search or move to the previous match.
+# # Optional; default: unset
+# # history_search_previous = "example"
+#
+# # Queue the current composer draft while a task is running.
+# # Optional; default: unset
+# # queue = "example"
+#
+# # Submit the current composer draft.
+# # Optional; default: unset
+# # submit = "example"
+#
+# # Toggle the composer shortcut overlay.
+# # Optional; default: unset
+# # toggle_shortcuts = "example"
+#
+# # Editor context keybindings for text editing inside text areas.
+# # Default: {'delete_backward': None, 'delete_backward_word': None, 'delete_forward': None, 'delete_forward_word': None, 'insert_newline': None, 'kill_line_end': None, 'kill_line_start': None, 'move_down': None, 'move_left': None, 'move_line_end': None, 'move_line_start': None, 'move_right': None, 'move_up': None, 'move_word_left': None, 'move_word_right': None, 'yank': None}
+# [tui.keymap.editor]
+#
+# # Delete one grapheme to the left.
+# # Optional; default: unset
+# # delete_backward = "example"
+#
+# # Delete the previous word.
+# # Optional; default: unset
+# # delete_backward_word = "example"
+#
+# # Delete one grapheme to the right.
+# # Optional; default: unset
+# # delete_forward = "example"
+#
+# # Delete the next word.
+# # Optional; default: unset
+# # delete_forward_word = "example"
+#
+# # Insert a newline in the editor.
+# # Optional; default: unset
+# # insert_newline = "example"
+#
+# # Kill text from cursor to line end.
+# # Optional; default: unset
+# # kill_line_end = "example"
+#
+# # Kill text from cursor to line start.
+# # Optional; default: unset
+# # kill_line_start = "example"
+#
+# # Move cursor down one visual line.
+# # Optional; default: unset
+# # move_down = "example"
+#
+# # Move cursor left by one grapheme.
+# # Optional; default: unset
+# # move_left = "example"
+#
+# # Move cursor to end of line.
+# # Optional; default: unset
+# # move_line_end = "example"
+#
+# # Move cursor to beginning of line.
+# # Optional; default: unset
+# # move_line_start = "example"
+#
+# # Move cursor right by one grapheme.
+# # Optional; default: unset
+# # move_right = "example"
+#
+# # Move cursor up one visual line.
+# # Optional; default: unset
+# # move_up = "example"
+#
+# # Move cursor to beginning of previous word.
+# # Optional; default: unset
+# # move_word_left = "example"
+#
+# # Move cursor to end of next word.
+# # Optional; default: unset
+# # move_word_right = "example"
+#
+# # Yank the kill buffer.
+# # Optional; default: unset
+# # yank = "example"
+#
+# # Global keybindings. These are used when a context does not define an override.
+# # Default: {'clear_terminal': None, 'copy': None, 'open_external_editor': None, 'open_transcript': None, 'queue': None, 'submit': None, 'toggle_shortcuts': None}
+# [tui.keymap.global]
+#
+# # Clear the terminal UI.
+# # Optional; default: unset
+# # clear_terminal = "example"
+#
+# # Copy the last agent response to the clipboard.
+# # Optional; default: unset
+# # copy = "example"
+#
+# # Open the external editor for the current draft.
+# # Optional; default: unset
+# # open_external_editor = "example"
+#
+# # Open the transcript overlay.
+# # Optional; default: unset
+# # open_transcript = "example"
+#
+# # Queue the current composer draft while a task is running.
+# # Optional; default: unset
+# # queue = "example"
+#
+# # Submit the current composer draft.
+# # Optional; default: unset
+# # submit = "example"
+#
+# # Toggle the composer shortcut overlay.
+# # Optional; default: unset
+# # toggle_shortcuts = "example"
+#
+# # List selection context keybindings for popup-style selectable lists.
+# # Default: {'accept': None, 'cancel': None, 'move_down': None, 'move_up': None}
+# [tui.keymap.list]
+#
+# # Accept current selection.
+# # Optional; default: unset
+# # accept = "example"
+#
+# # Cancel and close selection view.
+# # Optional; default: unset
+# # cancel = "example"
+#
+# # Move list selection down.
+# # Optional; default: unset
+# # move_down = "example"
+#
+# # Move list selection up.
+# # Optional; default: unset
+# # move_up = "example"
+#
+# # Pager context keybindings for transcript and static overlays.
+# # Default: {'close': None, 'close_transcript': None, 'half_page_down': None, 'half_page_up': None, 'jump_bottom': None, 'jump_top': None, 'page_down': None, 'page_up': None, 'scroll_down': None, 'scroll_up': None}
+# [tui.keymap.pager]
+#
+# # Close the pager overlay.
+# # Optional; default: unset
+# # close = "example"
+#
+# # Close the transcript overlay via its dedicated toggle key.
+# # Optional; default: unset
+# # close_transcript = "example"
+#
+# # Scroll down by half a page.
+# # Optional; default: unset
+# # half_page_down = "example"
+#
+# # Scroll up by half a page.
+# # Optional; default: unset
+# # half_page_up = "example"
+#
+# # Jump to the end.
+# # Optional; default: unset
+# # jump_bottom = "example"
+#
+# # Jump to the beginning.
+# # Optional; default: unset
+# # jump_top = "example"
+#
+# # Scroll down by one page.
+# # Optional; default: unset
+# # page_down = "example"
+#
+# # Scroll up by one page.
+# # Optional; default: unset
+# # page_up = "example"
+#
+# # Scroll down by one row.
+# # Optional; default: unset
+# # scroll_down = "example"
+#
+# # Scroll up by one row.
+# # Optional; default: unset
+# # scroll_up = "example"
 #
 # # Startup tooltip availability NUX state persisted by the TUI.
 # # Default: {}
@@ -1382,6 +1669,42 @@ sandbox = "elevated"
 # # Default: True
 # enabled = true
 #
+# # Per-MCP-server policy overlays for MCP servers contributed by this plugin.
+# # Optional; default: unset
+# [plugins.example.mcp_servers]
+#
+# # Example entry
+# # [plugins.example.mcp_servers.example]
+# # # Approval mode for tools in this server unless a tool override exists.
+# # # Allowed: auto | prompt | approve
+# # # Optional; default: unset
+# # default_tools_approval_mode = "auto"
+# #
+# # # Explicit deny-list of tools. These tools are removed after applying `enabled_tools`.
+# # # Optional; default: unset
+# # # disabled_tools = ["example"]
+# #
+# # # When `false`, Codex skips initializing this plugin MCP server.
+# # # Default: True
+# # enabled = true
+# #
+# # # Explicit allow-list of tools exposed from this server.
+# # # Optional; default: unset
+# # # enabled_tools = ["example"]
+# #
+# # # Per-tool approval settings keyed by tool name.
+# # # Optional; default: unset
+# # [plugins.example.mcp_servers.example.tools]
+# #
+# # # Example entry
+# # # [plugins.example.mcp_servers.example.tools."files/delete"]
+# # # # Approval mode for this tool.
+# # # # Allowed: auto | prompt | approve
+# # # # Optional; default: unset
+# # # approval_mode = "auto"
+# # #
+# #
+#
 
 # Named profiles to facilitate switching between different configurations.
 # Default: {}
@@ -1425,16 +1748,6 @@ sandbox = "elevated"
 #
 # # Optional; default: unset
 # # include_permissions_instructions = false
-#
-# # Ordered list of directories to search for Node modules in `js_repl`.
-# # Optional; default: unset
-# # js_repl_node_module_dirs = ["example"]
-#
-# # A path that is guaranteed to be absolute and normalized (though it is not guaranteed to be canonicalized or exist on the filesystem).
-# # 
-# # IMPORTANT: When deserializing an `AbsolutePathBuf`, a base path must be set using [AbsolutePathBufGuard::new]. If no base path is set, the deserialization will fail unless the path being deserialized is already absolute.
-# # Optional; default: unset
-# # js_repl_node_path = "example"
 #
 # # Optional; default: unset
 # # model = "example"
@@ -1521,6 +1834,9 @@ sandbox = "elevated"
 # # apps = false
 #
 # # Optional; default: unset
+# # apps_mcp_path_override = false
+#
+# # Optional; default: unset
 # # browser_use = false
 #
 # # Optional; default: unset
@@ -1566,6 +1882,9 @@ sandbox = "elevated"
 # # enable_fanout = false
 #
 # # Optional; default: unset
+# # enable_mcp_apps = false
+#
+# # Optional; default: unset
 # # enable_request_compression = false
 #
 # # Optional; default: unset
@@ -1587,7 +1906,7 @@ sandbox = "elevated"
 # # fast_mode = false
 #
 # # Optional; default: unset
-# # general_analytics = false
+# # goals = false
 #
 # # Optional; default: unset
 # # guardian_approval = false
@@ -1624,6 +1943,9 @@ sandbox = "elevated"
 #
 # # Optional; default: unset
 # # personality = false
+#
+# # Optional; default: unset
+# # plugin_hooks = false
 #
 # # Optional; default: unset
 # # plugins = false
@@ -1687,6 +2009,9 @@ sandbox = "elevated"
 #
 # # Optional; default: unset
 # # telepathy = false
+#
+# # Optional; default: unset
+# # terminal_resize_reflow = false
 #
 # # Optional; default: unset
 # # tool_call_mcp_elicitation = false
