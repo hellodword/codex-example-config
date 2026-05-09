@@ -5,7 +5,8 @@ import urllib.request
 from typing import Any, Dict, List, Optional, Tuple
 
 
-SCHEMA_URL = "https://developers.openai.com/codex/config-schema.json"
+SCHEMA_PATH = "config.schema.json"
+SCHEMA_URL = "https://raw.githubusercontent.com/hellodword/codex-example-config/refs/heads/master/config.schema.json"
 
 
 # -----------------------------
@@ -382,14 +383,14 @@ def render_schema_to_toml(schema: Dict[str, Any]) -> str:
 
 
 def main() -> None:
-    src = sys.argv[1] if len(sys.argv) > 1 else SCHEMA_URL
+    src = sys.argv[1] if len(sys.argv) > 1 else SCHEMA_PATH
     out = sys.argv[2] if len(sys.argv) > 2 else "config.generated.toml"
 
     schema = load_schema(src)
     text = render_schema_to_toml(schema)
 
     with open(out, "w", encoding="utf-8") as f:
-        f.write("#:schema https://developers.openai.com/codex/config-schema.json\n")
+        f.write(f"#:schema {SCHEMA_URL}\n")
         f.write(text)
 
 if __name__ == "__main__":

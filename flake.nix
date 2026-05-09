@@ -1,5 +1,5 @@
 {
-  description = "Update config.toml from the OpenAI Codex config sample";
+  description = "Update config.toml and config.schema.json from OpenAI Codex sources";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -35,6 +35,7 @@
               python3
             ];
             text = ''
+              bash ${./scripts/update-schema.sh}
               bash ${./scripts/update-config.sh}
               python3 ${./scripts/generate-toml-from-json-schema.py}
             '';

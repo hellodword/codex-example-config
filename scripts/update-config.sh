@@ -3,6 +3,7 @@ set -euo pipefail
 
 source_url="https://developers.openai.com/codex/config-sample"
 output_path="config.toml"
+schema_url="https://raw.githubusercontent.com/hellodword/codex-example-config/refs/heads/master/config.schema.json"
 
 while [[ $# -gt 0 ]]; do
   case "$1" in
@@ -12,6 +13,10 @@ while [[ $# -gt 0 ]]; do
       ;;
     --output)
       output_path="${2:?missing value for --output}"
+      shift 2
+      ;;
+    --schema-url)
+      schema_url="${2:?missing value for --schema-url}"
       shift 2
       ;;
     *)
@@ -32,6 +37,6 @@ case "$source_url" in
 esac | htmlq --text '#mainContent > .astro-code' >"$tmp_output"
 
 grep -q '[^[:space:]]' "$tmp_output"
-sed -i '1s@^@#:schema https://developers.openai.com/codex/config-schema.json\n@' "$tmp_output"
+sed -i "1s@^@#:schema ${schema_url}\n@" "$tmp_output"
 chmod 0644 -- "$tmp_output"
 mv -- "$tmp_output" "$output_path"

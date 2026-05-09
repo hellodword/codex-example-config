@@ -28,13 +28,13 @@ jobs:
 
       - run: nix run . --no-write-lock-file
 
-      - name: Commit and push config.toml
+      - name: Commit and push config files
         shell: bash
         run: |
           set -euo pipefail
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-          git add config.toml config.generated.toml
+          git add config.schema.json config.toml config.generated.toml
           git diff --cached --quiet && exit 0
           git commit -m "chore: update sample config"
           git push origin HEAD:${{ github.ref_name }}
