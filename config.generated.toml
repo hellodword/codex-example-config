@@ -90,10 +90,6 @@ developer_instructions = ""
 # Optional; default: unset
 # experimental_thread_config_endpoint = "example"
 
-# Experimental / do not use. When set, app-server uses a remote thread store at this endpoint instead of the local filesystem/SQLite store.
-# Optional; default: unset
-# experimental_thread_store_endpoint = "example"
-
 # Optional; default: unset
 # experimental_use_freeform_apply_patch = false
 
@@ -991,6 +987,17 @@ persistence = "save-all"
 # # Allowed: none | statsig
 # # Optional; default: unset
 # trace_exporter = "none"
+#
+# # Attributes to add to every exported trace span.
+# # Optional; default: unset
+# [otel.span_attributes]
+#
+# # Semicolon-separated `key:value` fields to upsert into W3C tracestate members.
+# # Optional; default: unset
+# [otel.tracestate]
+#
+# # Example entry
+# # [otel.tracestate.example]
 #
 
 # Named permissions profiles.
