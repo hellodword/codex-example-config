@@ -21,6 +21,10 @@ approval_policy = "untrusted"
 # Optional; default: unset
 approvals_reviewer = "user"
 
+# Optional product SKU forwarded on host-owned Codex Apps MCP requests.
+# Optional; default: unset
+# apps_mcp_product_sku = "example"
+
 # Maximum poll window for background terminal output (`write_stdin`), in milliseconds. Default: `300000` (5 minutes).
 # Optional; default: unset
 # background_terminal_max_timeout = 0
@@ -37,12 +41,6 @@ approvals_reviewer = "user"
 # Allowed: file
 # Default: None
 cli_auth_credentials_store = ""
-
-# Optional commit attribution text for commit message co-author trailers. This top-level setting only takes effect when `[features].codex_git_commit` is enabled.
-# 
-# When enabled and unset, Codex uses `Codex <noreply@openai.com>`. Set to an empty string to disable automatic commit attribution.
-# Optional; default: unset
-# commit_attribution = "example"
 
 # Compact prompt used for history compaction.
 # Optional; default: unset
@@ -91,9 +89,6 @@ developer_instructions = ""
 # experimental_thread_config_endpoint = "example"
 
 # Optional; default: unset
-# experimental_use_freeform_apply_patch = false
-
-# Optional; default: unset
 # experimental_use_unified_exec_tool = false
 
 # Optional URI-based file opener. If set, citations to files in the model output will be hyperlinked using the specified URI scheme.
@@ -101,7 +96,7 @@ developer_instructions = ""
 # Optional; default: unset
 file_opener = "vscode"
 
-# When set, restricts ChatGPT login to a specific workspace identifier.
+# When set, restricts ChatGPT login to one or more workspace identifiers.
 # Default: None
 forced_chatgpt_workspace_id = ""
 
@@ -117,6 +112,10 @@ hide_agent_reasoning = false
 # Whether to inject the `<apps_instructions>` developer block.
 # Optional; default: unset
 # include_apps_instructions = false
+
+# Whether to inject the `<collaboration_mode>` developer block.
+# Optional; default: unset
+# include_collaboration_mode_instructions = false
 
 # Whether to inject the `<environment_context>` user block.
 # Optional; default: unset
@@ -237,10 +236,9 @@ project_root_markers = ""
 # Optional; default: unset
 sandbox_mode = "read-only"
 
-# Optional explicit service tier preference for new turns (`fast` or `flex`).
-# Allowed: fast | flex
+# Optional explicit service tier request id for new turns (for example `priority` or `flex`; legacy `fast` also works).
 # Optional; default: unset
-service_tier = "fast"
+# service_tier = "example"
 
 # When set to `true`, `AgentReasoningRawContentEvent` events will be shown in the UI/output. Defaults to `false`.
 # Optional; default: unset
@@ -262,10 +260,6 @@ service_tier = "fast"
 # Allowed: disabled | cached | live
 # Optional; default: unset
 web_search = "disabled"
-
-# Tracks whether the Windows onboarding screen has been acknowledged.
-# Optional; default: unset
-# windows_wsl_setup_acknowledged = false
 
 # Optional absolute path to patched zsh used by zsh-exec-bridge-backed shell execution.
 # Optional; default: unset
@@ -323,6 +317,10 @@ web_search = "disabled"
 # #
 #
 
+# Opaque desktop settings stored alongside the rest of config.toml.
+# Default: None
+[desktop]
+
 # Experimental / do not use. Selects the thread store implementation.
 # Optional; default: unset
 # [experimental_thread_store]
@@ -356,9 +354,6 @@ web_search = "disabled"
 
 # Optional; default: unset
 # browser_use_external = false
-
-# Optional; default: unset
-# builtin_mcp = false
 
 # Optional; default: unset
 # child_agents_md = false
@@ -412,9 +407,6 @@ web_search = "disabled"
 # exec_permission_approvals = false
 
 # Optional; default: unset
-# experimental_use_freeform_apply_patch = false
-
-# Optional; default: unset
 # experimental_use_unified_exec_tool = false
 
 # Optional; default: unset
@@ -445,9 +437,6 @@ web_search = "disabled"
 # in_app_browser = false
 
 # Optional; default: unset
-# include_apply_patch_tool = false
-
-# Optional; default: unset
 # js_repl = false
 
 # Optional; default: unset
@@ -460,16 +449,25 @@ web_search = "disabled"
 # memory_tool = false
 
 # Optional; default: unset
+# mentions_v2 = false
+
+# Optional; default: unset
 # multi_agent = false
 
 # Optional; default: unset
 # multi_agent_v2 = false
 
 # Optional; default: unset
+# network_proxy = false
+
+# Optional; default: unset
 # personality = false
 
 # Optional; default: unset
 # plugin_hooks = false
+
+# Optional; default: unset
+# plugin_sharing = false
 
 # Optional; default: unset
 # plugins = false
@@ -658,6 +656,9 @@ persistence = "save-all"
 # command = "example"
 #
 # # Default: None
+# commandWindows = ""
+#
+# # Default: None
 # statusMessage = ""
 #
 # # Default: None
@@ -683,6 +684,9 @@ persistence = "save-all"
 #
 # # Required
 # command = "example"
+#
+# # Default: None
+# commandWindows = ""
 #
 # # Default: None
 # statusMessage = ""
@@ -712,6 +716,9 @@ persistence = "save-all"
 # command = "example"
 #
 # # Default: None
+# commandWindows = ""
+#
+# # Default: None
 # statusMessage = ""
 #
 # # Default: None
@@ -737,6 +744,9 @@ persistence = "save-all"
 #
 # # Required
 # command = "example"
+#
+# # Default: None
+# commandWindows = ""
 #
 # # Default: None
 # statusMessage = ""
@@ -766,6 +776,9 @@ persistence = "save-all"
 # command = "example"
 #
 # # Default: None
+# commandWindows = ""
+#
+# # Default: None
 # statusMessage = ""
 #
 # # Default: None
@@ -791,6 +804,9 @@ persistence = "save-all"
 #
 # # Required
 # command = "example"
+#
+# # Default: None
+# commandWindows = ""
 #
 # # Default: None
 # statusMessage = ""
@@ -820,6 +836,9 @@ persistence = "save-all"
 # command = "example"
 #
 # # Default: None
+# commandWindows = ""
+#
+# # Default: None
 # statusMessage = ""
 #
 # # Default: None
@@ -845,6 +864,9 @@ persistence = "save-all"
 #
 # # Required
 # command = "example"
+#
+# # Default: None
+# commandWindows = ""
 #
 # # Default: None
 # statusMessage = ""
@@ -1041,7 +1063,7 @@ voice = "alloy"
 # writable_roots = []
 #
 
-# Policy for building the `env` when spawning a process via either the `shell` or `local_shell` tool.
+# Policy for building the `env` when spawning a process via shell-like tools.
 # Default: {'exclude': None, 'experimental_use_profile': None, 'ignore_default_excludes': None, 'include_only': None, 'inherit': None, 'set': None}
 [shell_environment_policy]
 
@@ -1129,10 +1151,6 @@ inherit = "core"
 # Optional; default: unset
 # [tools]
 
-# # Enable the `view_image` tool that lets the agent attach local images.
-# # Default: None
-# view_image = ""
-#
 # # Default: None
 # [tools.web_search]
 #
@@ -1166,9 +1184,7 @@ inherit = "core"
 
 # # Controls whether the TUI uses the terminal's alternate screen buffer.
 # # 
-# # - `auto` (default): Disable alternate screen in Zellij, enable elsewhere. - `always`: Always use alternate screen (original behavior). - `never`: Never use alternate screen (inline mode only, preserves scrollback).
-# # 
-# # Using alternate screen provides a cleaner fullscreen experience but prevents scrollback in terminal multiplexers like Zellij that follow the xterm spec.
+# # - `auto` (default): Use alternate screen. - `always`: Always use alternate screen. - `never`: Never use alternate screen (inline mode only, preserves scrollback).
 # # Allowed: auto
 # # Default: 'auto'
 # alternate_screen = "auto"
@@ -1190,6 +1206,19 @@ inherit = "core"
 # # Enable desktop notifications from the TUI. Defaults to `true`.
 # # Default: True
 # notifications = true
+#
+# # Pet id to preselect in the terminal pet picker.
+# # 
+# # Custom pet ids resolve against CODEX_HOME/pets/<pet-id>/pet.json.
+# # Default: None
+# pet = ""
+#
+# # Where the terminal pet should anchor vertically.
+# # 
+# # Defaults to `composer`, which follows the current TUI composer viewport.
+# # Allowed: composer
+# # Default: 'composer'
+# pet_anchor = "composer"
 #
 # # Start the TUI in raw scrollback mode for copy-friendly transcript output. Defaults to `false`.
 # # Default: False
@@ -1237,7 +1266,7 @@ inherit = "core"
 # # Keybinding overrides for the TUI.
 # # 
 # # This supports rebinding selected actions globally and by context. Context bindings take precedence over `global` bindings.
-# # Default: {'approval': {'approve': None, 'approve_for_prefix': None, 'approve_for_session': None, 'cancel': None, 'decline': None, 'deny': None, 'open_fullscreen': None, 'open_thread': None}, 'chat': {'decrease_reasoning_effort': None, 'edit_queued_message': None, 'increase_reasoning_effort': None}, 'composer': {'history_search_next': None, 'history_search_previous': None, 'queue': None, 'submit': None, 'toggle_shortcuts': None}, 'editor': {'delete_backward': None, 'delete_backward_word': None, 'delete_forward': None, 'delete_forward_word': None, 'insert_newline': None, 'kill_line_end': None, 'kill_line_start': None, 'kill_whole_line': None, 'move_down': None, 'move_left': None, 'move_line_end': None, 'move_line_start': None, 'move_right': None, 'move_up': None, 'move_word_left': None, 'move_word_right': None, 'yank': None}, 'global': {'clear_terminal': None, 'copy': None, 'open_external_editor': None, 'open_transcript': None, 'queue': None, 'submit': None, 'toggle_fast_mode': None, 'toggle_raw_output': None, 'toggle_shortcuts': None, 'toggle_vim_mode': None}, 'list': {'accept': None, 'cancel': None, 'move_down': None, 'move_up': None}, 'pager': {'close': None, 'close_transcript': None, 'half_page_down': None, 'half_page_up': None, 'jump_bottom': None, 'jump_top': None, 'page_down': None, 'page_up': None, 'scroll_down': None, 'scroll_up': None}, 'vim_normal': {'append_after_cursor': None, 'append_line_end': None, 'cancel_operator': None, 'delete_char': None, 'delete_to_line_end': None, 'enter_insert': None, 'insert_line_start': None, 'move_down': None, 'move_left': None, 'move_line_end': None, 'move_line_start': None, 'move_right': None, 'move_up': None, 'move_word_backward': None, 'move_word_end': None, 'move_word_forward': None, 'open_line_above': None, 'open_line_below': None, 'paste_after': None, 'start_delete_operator': None, 'start_yank_operator': None, 'yank_line': None}, 'vim_operator': {'cancel': None, 'delete_line': None, 'motion_down': None, 'motion_left': None, 'motion_line_end': None, 'motion_line_start': None, 'motion_right': None, 'motion_up': None, 'motion_word_backward': None, 'motion_word_end': None, 'motion_word_forward': None, 'yank_line': None}}
+# # Default: {'approval': {'approve': None, 'approve_for_prefix': None, 'approve_for_session': None, 'cancel': None, 'decline': None, 'deny': None, 'open_fullscreen': None, 'open_thread': None}, 'chat': {'decrease_reasoning_effort': None, 'edit_queued_message': None, 'increase_reasoning_effort': None}, 'composer': {'history_search_next': None, 'history_search_previous': None, 'queue': None, 'submit': None, 'toggle_shortcuts': None}, 'editor': {'delete_backward': None, 'delete_backward_word': None, 'delete_forward': None, 'delete_forward_word': None, 'insert_newline': None, 'kill_line_end': None, 'kill_line_start': None, 'kill_whole_line': None, 'move_down': None, 'move_left': None, 'move_line_end': None, 'move_line_start': None, 'move_right': None, 'move_up': None, 'move_word_left': None, 'move_word_right': None, 'yank': None}, 'global': {'clear_terminal': None, 'copy': None, 'open_external_editor': None, 'open_transcript': None, 'queue': None, 'submit': None, 'toggle_fast_mode': None, 'toggle_raw_output': None, 'toggle_shortcuts': None, 'toggle_vim_mode': None}, 'list': {'accept': None, 'cancel': None, 'jump_bottom': None, 'jump_top': None, 'move_down': None, 'move_left': None, 'move_right': None, 'move_up': None, 'page_down': None, 'page_up': None}, 'pager': {'close': None, 'close_transcript': None, 'half_page_down': None, 'half_page_up': None, 'jump_bottom': None, 'jump_top': None, 'page_down': None, 'page_up': None, 'scroll_down': None, 'scroll_up': None}, 'vim_normal': {'append_after_cursor': None, 'append_line_end': None, 'cancel_operator': None, 'delete_char': None, 'delete_to_line_end': None, 'enter_insert': None, 'insert_line_start': None, 'move_down': None, 'move_left': None, 'move_line_end': None, 'move_line_start': None, 'move_right': None, 'move_up': None, 'move_word_backward': None, 'move_word_end': None, 'move_word_forward': None, 'open_line_above': None, 'open_line_below': None, 'paste_after': None, 'start_delete_operator': None, 'start_yank_operator': None, 'yank_line': None}, 'vim_operator': {'cancel': None, 'delete_line': None, 'motion_down': None, 'motion_left': None, 'motion_line_end': None, 'motion_line_start': None, 'motion_right': None, 'motion_up': None, 'motion_word_backward': None, 'motion_word_end': None, 'motion_word_forward': None, 'yank_line': None}}
 # [tui.keymap]
 #
 # # Approval overlay keybindings.
@@ -1433,7 +1462,7 @@ inherit = "core"
 # # toggle_vim_mode = "example"
 #
 # # List selection context keybindings for popup-style selectable lists.
-# # Default: {'accept': None, 'cancel': None, 'move_down': None, 'move_up': None}
+# # Default: {'accept': None, 'cancel': None, 'jump_bottom': None, 'jump_top': None, 'move_down': None, 'move_left': None, 'move_right': None, 'move_up': None, 'page_down': None, 'page_up': None}
 # [tui.keymap.list]
 #
 # # Accept current selection.
@@ -1444,13 +1473,37 @@ inherit = "core"
 # # Optional; default: unset
 # # cancel = "example"
 #
+# # Jump to the last list item.
+# # Optional; default: unset
+# # jump_bottom = "example"
+#
+# # Jump to the first list item.
+# # Optional; default: unset
+# # jump_top = "example"
+#
 # # Move list selection down.
 # # Optional; default: unset
 # # move_down = "example"
 #
+# # Move horizontally left in list pickers that support horizontal actions.
+# # Optional; default: unset
+# # move_left = "example"
+#
+# # Move horizontally right in list pickers that support horizontal actions.
+# # Optional; default: unset
+# # move_right = "example"
+#
 # # Move list selection up.
 # # Optional; default: unset
 # # move_up = "example"
+#
+# # Move list selection down by one page.
+# # Optional; default: unset
+# # page_down = "example"
+#
+# # Move list selection up by one page.
+# # Optional; default: unset
+# # page_up = "example"
 #
 # # Pager context keybindings for transcript and static overlays.
 # # Default: {'close': None, 'close_transcript': None, 'half_page_down': None, 'half_page_up': None, 'jump_bottom': None, 'jump_top': None, 'page_down': None, 'page_up': None, 'scroll_down': None, 'scroll_up': None}
@@ -1821,6 +1874,14 @@ sandbox = "elevated"
 # # Optional; default: unset
 # # url = "example"
 #
+# # OAuth client settings used when Codex launches an MCP OAuth flow.
+# # Default: None
+# [mcp_servers.github.oauth]
+#
+# # Explicit OAuth client identifier to present during authorization and token exchange.
+# # Optional; default: unset
+# # client_id = "example"
+#
 # # Default: None
 # [mcp_servers.github.env]
 #
@@ -2020,16 +2081,13 @@ sandbox = "elevated"
 # # experimental_compact_prompt_file = "example"
 #
 # # Optional; default: unset
-# # experimental_use_freeform_apply_patch = false
-#
-# # Optional; default: unset
 # # experimental_use_unified_exec_tool = false
 #
 # # Optional; default: unset
-# # include_apply_patch_tool = false
+# # include_apps_instructions = false
 #
 # # Optional; default: unset
-# # include_apps_instructions = false
+# # include_collaboration_mode_instructions = false
 #
 # # Optional; default: unset
 # # include_environment_context = false
@@ -2083,13 +2141,9 @@ sandbox = "elevated"
 # # Optional; default: unset
 # sandbox_mode = "read-only"
 #
-# # Optional explicit service tier preference for new turns (`fast` or `flex`).
-# # Allowed: fast | flex
+# # Optional explicit service tier request id for new turns (for example `priority` or `flex`; legacy `fast` also works).
 # # Optional; default: unset
-# service_tier = "fast"
-#
-# # Optional; default: unset
-# # tools_view_image = false
+# # service_tier = "example"
 #
 # # Allowed: disabled | cached | live
 # # Optional; default: unset
@@ -2132,9 +2186,6 @@ sandbox = "elevated"
 #
 # # Optional; default: unset
 # # browser_use_external = false
-#
-# # Optional; default: unset
-# # builtin_mcp = false
 #
 # # Optional; default: unset
 # # child_agents_md = false
@@ -2188,9 +2239,6 @@ sandbox = "elevated"
 # # exec_permission_approvals = false
 #
 # # Optional; default: unset
-# # experimental_use_freeform_apply_patch = false
-#
-# # Optional; default: unset
 # # experimental_use_unified_exec_tool = false
 #
 # # Optional; default: unset
@@ -2221,9 +2269,6 @@ sandbox = "elevated"
 # # in_app_browser = false
 #
 # # Optional; default: unset
-# # include_apply_patch_tool = false
-#
-# # Optional; default: unset
 # # js_repl = false
 #
 # # Optional; default: unset
@@ -2236,16 +2281,25 @@ sandbox = "elevated"
 # # memory_tool = false
 #
 # # Optional; default: unset
+# # mentions_v2 = false
+#
+# # Optional; default: unset
 # # multi_agent = false
 #
 # # Optional; default: unset
 # # multi_agent_v2 = false
 #
 # # Optional; default: unset
+# # network_proxy = false
+#
+# # Optional; default: unset
 # # personality = false
 #
 # # Optional; default: unset
 # # plugin_hooks = false
+#
+# # Optional; default: unset
+# # plugin_sharing = false
 #
 # # Optional; default: unset
 # # plugins = false
@@ -2367,10 +2421,6 @@ sandbox = "elevated"
 # # Optional; default: unset
 # # [profiles.default.tools]
 #
-# # # Enable the `view_image` tool that lets the agent attach local images.
-# # # Default: None
-# # view_image = ""
-# #
 # # # Default: None
 # # [profiles.default.tools.web_search]
 # #
