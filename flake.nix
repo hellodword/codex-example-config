@@ -27,16 +27,11 @@
           update-config = pkgs.writeShellApplication {
             name = "exe";
             runtimeInputs = with pkgs; [
-              bash
-              coreutils
-              curl
-              gnugrep
-              htmlq
               python3
             ];
             text = ''
-              bash ${./scripts/update-schema.sh}
-              bash ${./scripts/update-config.sh}
+              python3 ${./scripts/update-schema.py}
+              python3 ${./scripts/update-config.py}
               python3 ${./scripts/generate-toml-from-json-schema.py}
             '';
           };

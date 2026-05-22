@@ -1,5 +1,8 @@
+#!/usr/bin/env python3
+import argparse
 import copy
 import json
+import os
 import sys
 import urllib.request
 from typing import Any, Dict, List, Optional, Tuple
@@ -13,11 +16,14 @@ SCHEMA_URL = "https://raw.githubusercontent.com/hellodword/codex-example-config/
 # Load schema
 # -----------------------------
 def load_schema(path_or_url: str) -> Dict[str, Any]:
-    if path_or_url.startswith("http://") or path_or_url.startswith("https://"):
-        with urllib.request.urlopen(path_or_url) as resp:
-            return json.load(resp)
-    with open(path_or_url, "r", encoding="utf-8") as f:
-        return json.load(f)
+    try:
+        if path_or_url.startswith("http://") or path_or_url.startswith("https://"):
+            with urllib.request.urlopen(path_or_url) as resp:
+                return json.load(resp)
+        with open(path_or_url, "r", encoding="utf-8") as f:
+            return json.load(f)
+    except Exception as exc:
+        raise RuntimeError(f"cannot load schema {path_or_url!r}: {exc}") from exc
 
 
 # -----------------------------
@@ -382,16 +388,44 @@ def render_schema_to_toml(schema: Dict[str, Any]) -> str:
     return "\n".join(lines) + "\n"
 
 
-def main() -> None:
-    src = sys.argv[1] if len(sys.argv) > 1 else SCHEMA_PATH
-    out = sys.argv[2] if len(sys.argv) > 2 else "config.generated.toml"
+def parse_args(argv: List[str]) -> argparse.Namespace:
+    parser = argparse.ArgumentParser(
+        description="Generate an example TOML file from a JSON schema."
+    )
+    parser.add_argument("schema", nargs="?", default=SCHEMA_PATH, help="Schema path or URL")
+    parser.add_argument("output", nargs="?", default="config.generated.toml", help="Output TOML path")
+    parser.add_argument("--schema-url", default=SCHEMA_URL, help="Schema URL written as the TOML header")
+    return parser.parse_args(argv)
 
-    schema = load_schema(src)
-    text = render_schema_to_toml(schema)
 
-    with open(out, "w", encoding="utf-8") as f:
-        f.write(f"#:schema {SCHEMA_URL}\n")
-        f.write(text)
+def log(message: str) -> None:
+    print(f"[generate-toml-from-json-schema.py] {message}", file=sys.stderr)
+
+
+def main(argv: List[str]) -> int:
+    args = parse_args(argv)
+
+    try:
+        log(f"loading schema: {args.schema}")
+        schema = load_schema(args.schema)
+        text = render_schema_to_toml(schema)
+
+        output_dir = os.path.dirname(args.output)
+        if output_dir:
+            os.makedirs(output_dir, exist_ok=True)
+
+        log(f"writing output: {args.output}")
+        with open(args.output, "w", encoding="utf-8") as f:
+            f.write(f"#:schema {args.schema_url}\n")
+            f.write(text)
+        log(f"updated {args.output}")
+        return 0
+    except Exception as exc:
+        print("error: failed to generate TOML from JSON schema", file=sys.stderr)
+        print(f"  schema: {args.schema}", file=sys.stderr)
+        print(f"  output: {args.output}", file=sys.stderr)
+        print(f"  reason: {exc}", file=sys.stderr)
+        return 1
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main(sys.argv[1:]))
