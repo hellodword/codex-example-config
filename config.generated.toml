@@ -154,6 +154,11 @@ mcp_oauth_credentials_store = ""
 # Optional; default: unset
 # model_auto_compact_token_limit = 0
 
+# Controls whether the auto-compaction limit applies to the full context or only to tokens after the carried prefix in the current compaction window.
+# Allowed: total
+# Optional; default: unset
+model_auto_compact_token_limit_scope = "total"
+
 # Optional path to a JSON model catalog (applied on startup only). Per-thread `config` overrides are accepted but do not reapply this (no-ops).
 # Optional; default: unset
 # model_catalog_json = "example"
@@ -236,7 +241,7 @@ project_root_markers = ""
 # Optional; default: unset
 sandbox_mode = "read-only"
 
-# Optional explicit service tier request id for new turns (for example `priority` or `flex`; legacy `fast` also works).
+# Optional explicit service tier request id for new turns (for example `default`, `priority`, or `flex`; legacy `fast` also works).
 # Optional; default: unset
 # service_tier = "example"
 
@@ -828,6 +833,66 @@ persistence = "save-all"
 #
 # # Default: []
 # [[hooks.Stop.hooks]]
+#
+# # Default: False
+# async = false
+#
+# # Required
+# command = "example"
+#
+# # Default: None
+# commandWindows = ""
+#
+# # Default: None
+# statusMessage = ""
+#
+# # Default: None
+# timeout = ""
+#
+# # Allowed: command
+# # Required
+# type = "command"
+#
+#
+#
+# # Default: []
+# [[hooks.SubagentStart]]
+#
+# # Default: None
+# matcher = ""
+#
+# # Default: []
+# [[hooks.SubagentStart.hooks]]
+#
+# # Default: False
+# async = false
+#
+# # Required
+# command = "example"
+#
+# # Default: None
+# commandWindows = ""
+#
+# # Default: None
+# statusMessage = ""
+#
+# # Default: None
+# timeout = ""
+#
+# # Allowed: command
+# # Required
+# type = "command"
+#
+#
+#
+# # Default: []
+# [[hooks.SubagentStop]]
+#
+# # Default: None
+# matcher = ""
+#
+# # Default: []
+# [[hooks.SubagentStop.hooks]]
 #
 # # Default: False
 # async = false
@@ -2141,7 +2206,7 @@ sandbox = "elevated"
 # # Optional; default: unset
 # sandbox_mode = "read-only"
 #
-# # Optional explicit service tier request id for new turns (for example `priority` or `flex`; legacy `fast` also works).
+# # Optional explicit service tier request id for new turns (for example `default`, `priority`, or `flex`; legacy `fast` also works).
 # # Optional; default: unset
 # # service_tier = "example"
 #
