@@ -129,7 +129,7 @@ hide_agent_reasoning = false
 # Optional; default: unset
 # instructions = "example"
 
-# Directory where Codex writes log files, for example `codex-tui.log`. Defaults to `$CODEX_HOME/log`.
+# Directory where Codex writes log files. Setting this value explicitly also enables the TUI text log in this directory. Defaults to `$CODEX_HOME/log`.
 # Optional; default: unset
 # log_dir = "example"
 
@@ -1909,7 +1909,7 @@ sandbox = "elevated"
 # env_vars = ""
 #
 # # Default: None
-# experimental_environment = ""
+# environment_id = ""
 #
 # # Legacy display-name field accepted for backward compatibility.
 # # Default: None
