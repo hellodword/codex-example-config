@@ -266,10 +266,6 @@ sandbox_mode = "read-only"
 # Optional; default: unset
 web_search = "disabled"
 
-# Optional absolute path to patched zsh used by zsh-exec-bridge-backed shell execution.
-# Optional; default: unset
-# zsh_path = "example"
-
 # When `false`, disables analytics across Codex product surfaces in this machine. Defaults to `true`.
 # Optional; default: unset
 # [analytics]
@@ -466,6 +462,9 @@ web_search = "disabled"
 # network_proxy = false
 
 # Optional; default: unset
+# non_prefixed_mcp_tool_names = false
+
+# Optional; default: unset
 # personality = false
 
 # Optional; default: unset
@@ -536,6 +535,9 @@ web_search = "disabled"
 
 # Optional; default: unset
 # sqlite = false
+
+# Optional; default: unset
+# standalone_web_search = false
 
 # Optional; default: unset
 # steer = false
@@ -954,6 +956,10 @@ persistence = "save-all"
 # # Optional; default: unset
 # # consolidation_model = "example"
 #
+# # When `true`, expose dedicated memory tools through the extension tool surface.
+# # Optional; default: unset
+# # dedicated_tools = false
+#
 # # When `true`, external context sources mark the thread `memory_mode` as `"polluted"`.
 # # Optional; default: unset
 # # disable_on_external_context = false
@@ -1331,7 +1337,7 @@ inherit = "core"
 # # Keybinding overrides for the TUI.
 # # 
 # # This supports rebinding selected actions globally and by context. Context bindings take precedence over `global` bindings.
-# # Default: {'approval': {'approve': None, 'approve_for_prefix': None, 'approve_for_session': None, 'cancel': None, 'decline': None, 'deny': None, 'open_fullscreen': None, 'open_thread': None}, 'chat': {'decrease_reasoning_effort': None, 'edit_queued_message': None, 'increase_reasoning_effort': None}, 'composer': {'history_search_next': None, 'history_search_previous': None, 'queue': None, 'submit': None, 'toggle_shortcuts': None}, 'editor': {'delete_backward': None, 'delete_backward_word': None, 'delete_forward': None, 'delete_forward_word': None, 'insert_newline': None, 'kill_line_end': None, 'kill_line_start': None, 'kill_whole_line': None, 'move_down': None, 'move_left': None, 'move_line_end': None, 'move_line_start': None, 'move_right': None, 'move_up': None, 'move_word_left': None, 'move_word_right': None, 'yank': None}, 'global': {'clear_terminal': None, 'copy': None, 'open_external_editor': None, 'open_transcript': None, 'queue': None, 'submit': None, 'toggle_fast_mode': None, 'toggle_raw_output': None, 'toggle_shortcuts': None, 'toggle_vim_mode': None}, 'list': {'accept': None, 'cancel': None, 'jump_bottom': None, 'jump_top': None, 'move_down': None, 'move_left': None, 'move_right': None, 'move_up': None, 'page_down': None, 'page_up': None}, 'pager': {'close': None, 'close_transcript': None, 'half_page_down': None, 'half_page_up': None, 'jump_bottom': None, 'jump_top': None, 'page_down': None, 'page_up': None, 'scroll_down': None, 'scroll_up': None}, 'vim_normal': {'append_after_cursor': None, 'append_line_end': None, 'cancel_operator': None, 'delete_char': None, 'delete_to_line_end': None, 'enter_insert': None, 'insert_line_start': None, 'move_down': None, 'move_left': None, 'move_line_end': None, 'move_line_start': None, 'move_right': None, 'move_up': None, 'move_word_backward': None, 'move_word_end': None, 'move_word_forward': None, 'open_line_above': None, 'open_line_below': None, 'paste_after': None, 'start_delete_operator': None, 'start_yank_operator': None, 'yank_line': None}, 'vim_operator': {'cancel': None, 'delete_line': None, 'motion_down': None, 'motion_left': None, 'motion_line_end': None, 'motion_line_start': None, 'motion_right': None, 'motion_up': None, 'motion_word_backward': None, 'motion_word_end': None, 'motion_word_forward': None, 'yank_line': None}}
+# # Default: {'approval': {'approve': None, 'approve_for_prefix': None, 'approve_for_session': None, 'cancel': None, 'decline': None, 'deny': None, 'open_fullscreen': None, 'open_thread': None}, 'chat': {'decrease_reasoning_effort': None, 'edit_queued_message': None, 'increase_reasoning_effort': None, 'interrupt_turn': None}, 'composer': {'history_search_next': None, 'history_search_previous': None, 'queue': None, 'submit': None, 'toggle_shortcuts': None}, 'editor': {'delete_backward': None, 'delete_backward_word': None, 'delete_forward': None, 'delete_forward_word': None, 'insert_newline': None, 'kill_line_end': None, 'kill_line_start': None, 'kill_whole_line': None, 'move_down': None, 'move_left': None, 'move_line_end': None, 'move_line_start': None, 'move_right': None, 'move_up': None, 'move_word_left': None, 'move_word_right': None, 'yank': None}, 'global': {'clear_terminal': None, 'copy': None, 'open_external_editor': None, 'open_transcript': None, 'queue': None, 'submit': None, 'toggle_fast_mode': None, 'toggle_raw_output': None, 'toggle_shortcuts': None, 'toggle_vim_mode': None}, 'list': {'accept': None, 'cancel': None, 'jump_bottom': None, 'jump_top': None, 'move_down': None, 'move_left': None, 'move_right': None, 'move_up': None, 'page_down': None, 'page_up': None}, 'pager': {'close': None, 'close_transcript': None, 'half_page_down': None, 'half_page_up': None, 'jump_bottom': None, 'jump_top': None, 'page_down': None, 'page_up': None, 'scroll_down': None, 'scroll_up': None}, 'vim_normal': {'append_after_cursor': None, 'append_line_end': None, 'cancel_operator': None, 'change_to_line_end': None, 'delete_char': None, 'delete_to_line_end': None, 'enter_insert': None, 'insert_line_start': None, 'move_down': None, 'move_left': None, 'move_line_end': None, 'move_line_start': None, 'move_right': None, 'move_up': None, 'move_word_backward': None, 'move_word_end': None, 'move_word_forward': None, 'open_line_above': None, 'open_line_below': None, 'paste_after': None, 'start_change_operator': None, 'start_delete_operator': None, 'start_yank_operator': None, 'yank_line': None}, 'vim_operator': {'cancel': None, 'delete_line': None, 'motion_down': None, 'motion_left': None, 'motion_line_end': None, 'motion_line_start': None, 'motion_right': None, 'motion_up': None, 'motion_word_backward': None, 'motion_word_end': None, 'motion_word_forward': None, 'select_around_text_object': None, 'select_inner_text_object': None, 'yank_line': None}, 'vim_text_object': {'backtick': None, 'big_word': None, 'braces': None, 'brackets': None, 'cancel': None, 'double_quote': None, 'parentheses': None, 'single_quote': None, 'word': None}}
 # [tui.keymap]
 #
 # # Approval overlay keybindings.
@@ -1371,7 +1377,7 @@ inherit = "core"
 # # open_thread = "example"
 #
 # # Chat context keybindings.
-# # Default: {'decrease_reasoning_effort': None, 'edit_queued_message': None, 'increase_reasoning_effort': None}
+# # Default: {'decrease_reasoning_effort': None, 'edit_queued_message': None, 'increase_reasoning_effort': None, 'interrupt_turn': None}
 # [tui.keymap.chat]
 #
 # # Decrease the active reasoning effort.
@@ -1385,6 +1391,10 @@ inherit = "core"
 # # Increase the active reasoning effort.
 # # Optional; default: unset
 # # increase_reasoning_effort = "example"
+#
+# # Interrupt the active turn.
+# # Optional; default: unset
+# # interrupt_turn = "example"
 #
 # # Composer context keybindings. These override corresponding `global` actions.
 # # Default: {'history_search_next': None, 'history_search_previous': None, 'queue': None, 'submit': None, 'toggle_shortcuts': None}
@@ -1617,7 +1627,7 @@ inherit = "core"
 # # Vim normal-mode keybindings for modal editing inside text areas.
 # # 
 # # Actions that use uppercase letters (like `A` for append-line-end) should be specified as `shift-a` in config; the runtime matcher handles cross-terminal shift-reporting differences automatically.
-# # Default: {'append_after_cursor': None, 'append_line_end': None, 'cancel_operator': None, 'delete_char': None, 'delete_to_line_end': None, 'enter_insert': None, 'insert_line_start': None, 'move_down': None, 'move_left': None, 'move_line_end': None, 'move_line_start': None, 'move_right': None, 'move_up': None, 'move_word_backward': None, 'move_word_end': None, 'move_word_forward': None, 'open_line_above': None, 'open_line_below': None, 'paste_after': None, 'start_delete_operator': None, 'start_yank_operator': None, 'yank_line': None}
+# # Default: {'append_after_cursor': None, 'append_line_end': None, 'cancel_operator': None, 'change_to_line_end': None, 'delete_char': None, 'delete_to_line_end': None, 'enter_insert': None, 'insert_line_start': None, 'move_down': None, 'move_left': None, 'move_line_end': None, 'move_line_start': None, 'move_right': None, 'move_up': None, 'move_word_backward': None, 'move_word_end': None, 'move_word_forward': None, 'open_line_above': None, 'open_line_below': None, 'paste_after': None, 'start_change_operator': None, 'start_delete_operator': None, 'start_yank_operator': None, 'yank_line': None}
 # [tui.keymap.vim_normal]
 #
 # # Enter insert mode after cursor (`a`).
@@ -1631,6 +1641,10 @@ inherit = "core"
 # # Cancel a pending operator and return to normal mode.
 # # Optional; default: unset
 # # cancel_operator = "example"
+#
+# # Change from cursor to end of line and enter insert mode (`C`).
+# # Optional; default: unset
+# # change_to_line_end = "example"
 #
 # # Delete character under cursor (`x`).
 # # Optional; default: unset
@@ -1696,6 +1710,10 @@ inherit = "core"
 # # Optional; default: unset
 # # paste_after = "example"
 #
+# # Begin change operator; next keys select a text object.
+# # Optional; default: unset
+# # start_change_operator = "example"
+#
 # # Begin delete operator; next key selects motion (`d`).
 # # Optional; default: unset
 # # start_delete_operator = "example"
@@ -1711,7 +1729,7 @@ inherit = "core"
 # # Vim operator-pending keybindings for modal editing inside text areas.
 # # 
 # # This context is active only while waiting for a motion after `d` or `y`. Repeating the operator key (`dd`, `yy`) targets the entire line. Pressing `Esc` cancels the pending operator and returns to normal mode without modifying text.
-# # Default: {'cancel': None, 'delete_line': None, 'motion_down': None, 'motion_left': None, 'motion_line_end': None, 'motion_line_start': None, 'motion_right': None, 'motion_up': None, 'motion_word_backward': None, 'motion_word_end': None, 'motion_word_forward': None, 'yank_line': None}
+# # Default: {'cancel': None, 'delete_line': None, 'motion_down': None, 'motion_left': None, 'motion_line_end': None, 'motion_line_start': None, 'motion_right': None, 'motion_up': None, 'motion_word_backward': None, 'motion_word_end': None, 'motion_word_forward': None, 'select_around_text_object': None, 'select_inner_text_object': None, 'yank_line': None}
 # [tui.keymap.vim_operator]
 #
 # # Cancel the pending operator and return to normal mode.
@@ -1758,9 +1776,57 @@ inherit = "core"
 # # Optional; default: unset
 # # motion_word_forward = "example"
 #
+# # Select an around text object after an operator.
+# # Optional; default: unset
+# # select_around_text_object = "example"
+#
+# # Select an inner text object after an operator.
+# # Optional; default: unset
+# # select_inner_text_object = "example"
+#
 # # Repeat yank operator to yank the whole line (`yy`).
 # # Optional; default: unset
 # # yank_line = "example"
+#
+# # Vim text-object keybindings for modal editing inside text areas.
+# # Default: {'backtick': None, 'big_word': None, 'braces': None, 'brackets': None, 'cancel': None, 'double_quote': None, 'parentheses': None, 'single_quote': None, 'word': None}
+# [tui.keymap.vim_text_object]
+#
+# # Text object: backticks.
+# # Optional; default: unset
+# # backtick = "example"
+#
+# # Text object: whitespace-delimited WORD.
+# # Optional; default: unset
+# # big_word = "example"
+#
+# # Text object: braces.
+# # Optional; default: unset
+# # braces = "example"
+#
+# # Text object: brackets.
+# # Optional; default: unset
+# # brackets = "example"
+#
+# # Cancel the pending text-object command.
+# # Optional; default: unset
+# # cancel = "example"
+#
+# # Text object: double quotes.
+# # Optional; default: unset
+# # double_quote = "example"
+#
+# # Text object: parentheses.
+# # Optional; default: unset
+# # parentheses = "example"
+#
+# # Text object: single quotes.
+# # Optional; default: unset
+# # single_quote = "example"
+#
+# # Text object: word.
+# # Optional; default: unset
+# # word = "example"
 #
 # # Startup tooltip availability NUX state persisted by the TUI.
 # # Default: {}
@@ -2214,10 +2280,6 @@ sandbox = "elevated"
 # # Optional; default: unset
 # web_search = "disabled"
 #
-# # Optional absolute path to patched zsh used by zsh-exec-bridge-backed shell execution.
-# # Optional; default: unset
-# # zsh_path = "example"
-#
 # # Analytics settings loaded from config.toml. Fields are optional so we can apply defaults.
 # # Optional; default: unset
 # # [profiles.default.analytics]
@@ -2358,6 +2420,9 @@ sandbox = "elevated"
 # # network_proxy = false
 #
 # # Optional; default: unset
+# # non_prefixed_mcp_tool_names = false
+#
+# # Optional; default: unset
 # # personality = false
 #
 # # Optional; default: unset
@@ -2428,6 +2493,9 @@ sandbox = "elevated"
 #
 # # Optional; default: unset
 # # sqlite = false
+#
+# # Optional; default: unset
+# # standalone_web_search = false
 #
 # # Optional; default: unset
 # # steer = false
