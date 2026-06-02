@@ -435,6 +435,9 @@ web_search = "disabled"
 # image_generation = false
 
 # Optional; default: unset
+# imagegenext = false
+
+# Optional; default: unset
 # in_app_browser = false
 
 # Optional; default: unset
@@ -1222,6 +1225,13 @@ inherit = "core"
 # Optional; default: unset
 # [tools]
 
+# # Optional; default: unset
+# # [tools.experimental_request_user_input]
+#
+# # # Default: True
+# # enabled = true
+# #
+#
 # # Default: None
 # [tools.web_search]
 #
@@ -1337,7 +1347,7 @@ inherit = "core"
 # # Keybinding overrides for the TUI.
 # # 
 # # This supports rebinding selected actions globally and by context. Context bindings take precedence over `global` bindings.
-# # Default: {'approval': {'approve': None, 'approve_for_prefix': None, 'approve_for_session': None, 'cancel': None, 'decline': None, 'deny': None, 'open_fullscreen': None, 'open_thread': None}, 'chat': {'decrease_reasoning_effort': None, 'edit_queued_message': None, 'increase_reasoning_effort': None, 'interrupt_turn': None}, 'composer': {'history_search_next': None, 'history_search_previous': None, 'queue': None, 'submit': None, 'toggle_shortcuts': None}, 'editor': {'delete_backward': None, 'delete_backward_word': None, 'delete_forward': None, 'delete_forward_word': None, 'insert_newline': None, 'kill_line_end': None, 'kill_line_start': None, 'kill_whole_line': None, 'move_down': None, 'move_left': None, 'move_line_end': None, 'move_line_start': None, 'move_right': None, 'move_up': None, 'move_word_left': None, 'move_word_right': None, 'yank': None}, 'global': {'clear_terminal': None, 'copy': None, 'open_external_editor': None, 'open_transcript': None, 'queue': None, 'submit': None, 'toggle_fast_mode': None, 'toggle_raw_output': None, 'toggle_shortcuts': None, 'toggle_vim_mode': None}, 'list': {'accept': None, 'cancel': None, 'jump_bottom': None, 'jump_top': None, 'move_down': None, 'move_left': None, 'move_right': None, 'move_up': None, 'page_down': None, 'page_up': None}, 'pager': {'close': None, 'close_transcript': None, 'half_page_down': None, 'half_page_up': None, 'jump_bottom': None, 'jump_top': None, 'page_down': None, 'page_up': None, 'scroll_down': None, 'scroll_up': None}, 'vim_normal': {'append_after_cursor': None, 'append_line_end': None, 'cancel_operator': None, 'change_to_line_end': None, 'delete_char': None, 'delete_to_line_end': None, 'enter_insert': None, 'insert_line_start': None, 'move_down': None, 'move_left': None, 'move_line_end': None, 'move_line_start': None, 'move_right': None, 'move_up': None, 'move_word_backward': None, 'move_word_end': None, 'move_word_forward': None, 'open_line_above': None, 'open_line_below': None, 'paste_after': None, 'start_change_operator': None, 'start_delete_operator': None, 'start_yank_operator': None, 'yank_line': None}, 'vim_operator': {'cancel': None, 'delete_line': None, 'motion_down': None, 'motion_left': None, 'motion_line_end': None, 'motion_line_start': None, 'motion_right': None, 'motion_up': None, 'motion_word_backward': None, 'motion_word_end': None, 'motion_word_forward': None, 'select_around_text_object': None, 'select_inner_text_object': None, 'yank_line': None}, 'vim_text_object': {'backtick': None, 'big_word': None, 'braces': None, 'brackets': None, 'cancel': None, 'double_quote': None, 'parentheses': None, 'single_quote': None, 'word': None}}
+# # Default: {'approval': {'approve': None, 'approve_for_prefix': None, 'approve_for_session': None, 'cancel': None, 'decline': None, 'deny': None, 'open_fullscreen': None, 'open_thread': None}, 'chat': {'decrease_reasoning_effort': None, 'edit_queued_message': None, 'increase_reasoning_effort': None, 'interrupt_turn': None}, 'composer': {'history_search_next': None, 'history_search_previous': None, 'queue': None, 'submit': None, 'toggle_shortcuts': None}, 'editor': {'delete_backward': None, 'delete_backward_word': None, 'delete_forward': None, 'delete_forward_word': None, 'insert_newline': None, 'kill_line_end': None, 'kill_line_start': None, 'kill_whole_line': None, 'move_down': None, 'move_left': None, 'move_line_end': None, 'move_line_start': None, 'move_right': None, 'move_up': None, 'move_word_left': None, 'move_word_right': None, 'yank': None}, 'global': {'clear_terminal': None, 'copy': None, 'open_external_editor': None, 'open_transcript': None, 'queue': None, 'submit': None, 'toggle_fast_mode': None, 'toggle_raw_output': None, 'toggle_shortcuts': None, 'toggle_vim_mode': None}, 'list': {'accept': None, 'cancel': None, 'jump_bottom': None, 'jump_top': None, 'move_down': None, 'move_left': None, 'move_right': None, 'move_up': None, 'page_down': None, 'page_up': None}, 'pager': {'close': None, 'close_transcript': None, 'half_page_down': None, 'half_page_up': None, 'jump_bottom': None, 'jump_top': None, 'page_down': None, 'page_up': None, 'scroll_down': None, 'scroll_up': None}, 'vim_normal': {'append_after_cursor': None, 'append_line_end': None, 'cancel_operator': None, 'change_to_line_end': None, 'delete_char': None, 'delete_to_line_end': None, 'enter_insert': None, 'insert_line_start': None, 'move_down': None, 'move_left': None, 'move_line_end': None, 'move_line_start': None, 'move_right': None, 'move_up': None, 'move_word_backward': None, 'move_word_end': None, 'move_word_forward': None, 'open_line_above': None, 'open_line_below': None, 'paste_after': None, 'start_change_operator': None, 'start_delete_operator': None, 'start_yank_operator': None, 'substitute_char': None, 'yank_line': None}, 'vim_operator': {'cancel': None, 'delete_line': None, 'motion_down': None, 'motion_left': None, 'motion_line_end': None, 'motion_line_start': None, 'motion_right': None, 'motion_up': None, 'motion_word_backward': None, 'motion_word_end': None, 'motion_word_forward': None, 'select_around_text_object': None, 'select_inner_text_object': None, 'yank_line': None}, 'vim_text_object': {'backtick': None, 'big_word': None, 'braces': None, 'brackets': None, 'cancel': None, 'double_quote': None, 'parentheses': None, 'single_quote': None, 'word': None}}
 # [tui.keymap]
 #
 # # Approval overlay keybindings.
@@ -1627,7 +1637,7 @@ inherit = "core"
 # # Vim normal-mode keybindings for modal editing inside text areas.
 # # 
 # # Actions that use uppercase letters (like `A` for append-line-end) should be specified as `shift-a` in config; the runtime matcher handles cross-terminal shift-reporting differences automatically.
-# # Default: {'append_after_cursor': None, 'append_line_end': None, 'cancel_operator': None, 'change_to_line_end': None, 'delete_char': None, 'delete_to_line_end': None, 'enter_insert': None, 'insert_line_start': None, 'move_down': None, 'move_left': None, 'move_line_end': None, 'move_line_start': None, 'move_right': None, 'move_up': None, 'move_word_backward': None, 'move_word_end': None, 'move_word_forward': None, 'open_line_above': None, 'open_line_below': None, 'paste_after': None, 'start_change_operator': None, 'start_delete_operator': None, 'start_yank_operator': None, 'yank_line': None}
+# # Default: {'append_after_cursor': None, 'append_line_end': None, 'cancel_operator': None, 'change_to_line_end': None, 'delete_char': None, 'delete_to_line_end': None, 'enter_insert': None, 'insert_line_start': None, 'move_down': None, 'move_left': None, 'move_line_end': None, 'move_line_start': None, 'move_right': None, 'move_up': None, 'move_word_backward': None, 'move_word_end': None, 'move_word_forward': None, 'open_line_above': None, 'open_line_below': None, 'paste_after': None, 'start_change_operator': None, 'start_delete_operator': None, 'start_yank_operator': None, 'substitute_char': None, 'yank_line': None}
 # [tui.keymap.vim_normal]
 #
 # # Enter insert mode after cursor (`a`).
@@ -1721,6 +1731,10 @@ inherit = "core"
 # # Begin yank operator; next key selects motion (`y`).
 # # Optional; default: unset
 # # start_yank_operator = "example"
+#
+# # Delete character under cursor and enter insert mode (`s`).
+# # Optional; default: unset
+# # substitute_char = "example"
 #
 # # Yank the entire line (`Y`).
 # # Optional; default: unset
@@ -2393,6 +2407,9 @@ sandbox = "elevated"
 # # image_generation = false
 #
 # # Optional; default: unset
+# # imagegenext = false
+#
+# # Optional; default: unset
 # # in_app_browser = false
 #
 # # Optional; default: unset
@@ -2554,6 +2571,13 @@ sandbox = "elevated"
 # # Optional; default: unset
 # # [profiles.default.tools]
 #
+# # # Optional; default: unset
+# # # [profiles.default.tools.experimental_request_user_input]
+# #
+# # # # Default: True
+# # # enabled = true
+# # #
+# #
 # # # Default: None
 # # [profiles.default.tools.web_search]
 # #
