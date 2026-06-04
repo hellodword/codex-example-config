@@ -447,6 +447,9 @@ web_search = "disabled"
 # js_repl_tools_only = false
 
 # Optional; default: unset
+# local_thread_store_compression = false
+
+# Optional; default: unset
 # memories = false
 
 # Optional; default: unset
@@ -574,6 +577,9 @@ web_search = "disabled"
 
 # Optional; default: unset
 # unified_exec = false
+
+# Optional; default: unset
+# unified_exec_zsh_fork = false
 
 # Optional; default: unset
 # use_legacy_landlock = false
@@ -1884,6 +1890,11 @@ sandbox = "elevated"
 
 # Example entry
 # [apps.google_drive]
+# # Reviewer for approval prompts from this app, overriding the thread default.
+# # Allowed: user | auto_review | guardian_subagent
+# # Optional; default: unset
+# approvals_reviewer = "user"
+#
 # # Approval mode for tools in this app unless a tool override exists.
 # # Allowed: auto | prompt | approve
 # # Optional; default: unset
@@ -2419,6 +2430,9 @@ sandbox = "elevated"
 # # js_repl_tools_only = false
 #
 # # Optional; default: unset
+# # local_thread_store_compression = false
+#
+# # Optional; default: unset
 # # memories = false
 #
 # # Optional; default: unset
@@ -2546,6 +2560,9 @@ sandbox = "elevated"
 #
 # # Optional; default: unset
 # # unified_exec = false
+#
+# # Optional; default: unset
+# # unified_exec_zsh_fork = false
 #
 # # Optional; default: unset
 # # use_legacy_landlock = false
