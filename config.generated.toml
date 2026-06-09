@@ -175,10 +175,9 @@ model_auto_compact_token_limit_scope = "total"
 # Optional; default: unset
 # model_provider = "example"
 
-# See https://platform.openai.com/docs/guides/reasoning?api-mode=responses#get-started-with-reasoning
-# Allowed: none | minimal | low | medium | high | xhigh
+# A non-empty reasoning effort value advertised by the model.
 # Optional; default: unset
-model_reasoning_effort = "none"
+# model_reasoning_effort = "example"
 
 # A summary of the reasoning performed by the model. This can be useful for debugging and understanding the model's reasoning process. See https://platform.openai.com/docs/guides/reasoning?api-mode=responses#reasoning-summaries
 # Allowed: auto | concise | detailed
@@ -211,10 +210,9 @@ notify = ""
 # Optional; default: unset
 personality = "none"
 
-# See https://platform.openai.com/docs/guides/reasoning?api-mode=responses#get-started-with-reasoning
-# Allowed: none | minimal | low | medium | high | xhigh
+# A non-empty reasoning effort value advertised by the model.
 # Optional; default: unset
-plan_mode_reasoning_effort = "none"
+# plan_mode_reasoning_effort = "example"
 
 # Profile to use from the `profiles` map.
 # Optional; default: unset
@@ -510,9 +508,6 @@ web_search = "disabled"
 # request_rule = false
 
 # Optional; default: unset
-# responses_websocket_response_processed = false
-
-# Optional; default: unset
 # responses_websockets = false
 
 # Optional; default: unset
@@ -553,6 +548,9 @@ web_search = "disabled"
 
 # Optional; default: unset
 # terminal_resize_reflow = false
+
+# Optional; default: unset
+# terminal_visualization_instructions = false
 
 # Optional; default: unset
 # tool_call_mcp_elicitation = false
@@ -2266,10 +2264,9 @@ sandbox = "elevated"
 # # Optional; default: unset
 # # model_provider = "example"
 #
-# # See https://platform.openai.com/docs/guides/reasoning?api-mode=responses#get-started-with-reasoning
-# # Allowed: none | minimal | low | medium | high | xhigh
+# # A non-empty reasoning effort value advertised by the model.
 # # Optional; default: unset
-# model_reasoning_effort = "none"
+# # model_reasoning_effort = "example"
 #
 # # A summary of the reasoning performed by the model. This can be useful for debugging and understanding the model's reasoning process. See https://platform.openai.com/docs/guides/reasoning?api-mode=responses#reasoning-summaries
 # # Allowed: auto | concise | detailed
@@ -2288,10 +2285,9 @@ sandbox = "elevated"
 # # Optional; default: unset
 # personality = "none"
 #
-# # See https://platform.openai.com/docs/guides/reasoning?api-mode=responses#get-started-with-reasoning
-# # Allowed: none | minimal | low | medium | high | xhigh
+# # A non-empty reasoning effort value advertised by the model.
 # # Optional; default: unset
-# plan_mode_reasoning_effort = "none"
+# # plan_mode_reasoning_effort = "example"
 #
 # # Allowed: read-only | workspace-write | danger-full-access
 # # Optional; default: unset
@@ -2493,9 +2489,6 @@ sandbox = "elevated"
 # # request_rule = false
 #
 # # Optional; default: unset
-# # responses_websocket_response_processed = false
-#
-# # Optional; default: unset
 # # responses_websockets = false
 #
 # # Optional; default: unset
@@ -2536,6 +2529,9 @@ sandbox = "elevated"
 #
 # # Optional; default: unset
 # # terminal_resize_reflow = false
+#
+# # Optional; default: unset
+# # terminal_visualization_instructions = false
 #
 # # Optional; default: unset
 # # tool_call_mcp_elicitation = false
