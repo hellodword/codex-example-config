@@ -68,6 +68,10 @@ developer_instructions = ""
 # Optional; default: unset
 # experimental_realtime_start_instructions = "example"
 
+# Experimental / do not use. Overrides only the WebRTC realtime call creation base URL. This is separate from `experimental_realtime_ws_base_url` because WebRTC call creation is HTTP, while sideband control is websocket.
+# Optional; default: unset
+# experimental_realtime_webrtc_call_base_url = "example"
+
 # Experimental / do not use. Overrides only the realtime conversation websocket transport instructions (the `Op::RealtimeConversation` `/ws` session.update instructions) without changing normal prompts.
 # Optional; default: unset
 # experimental_realtime_ws_backend_prompt = "example"
@@ -508,6 +512,9 @@ web_search = "disabled"
 # request_rule = false
 
 # Optional; default: unset
+# resize_all_images = false
+
+# Optional; default: unset
 # responses_websockets = false
 
 # Optional; default: unset
@@ -518,6 +525,9 @@ web_search = "disabled"
 
 # Optional; default: unset
 # search_tool = false
+
+# Optional; default: unset
+# secret_auth_storage = false
 
 # Optional; default: unset
 # shell_snapshot = false
@@ -551,6 +561,9 @@ web_search = "disabled"
 
 # Optional; default: unset
 # terminal_visualization_instructions = false
+
+# Optional; default: unset
+# token_budget = false
 
 # Optional; default: unset
 # tool_call_mcp_elicitation = false
@@ -1107,6 +1120,10 @@ persistence = "save-all"
 # Experimental / do not use. Realtime websocket session selection. `version` controls v1/v2 and `type` controls conversational/transcription.
 # Default: None
 [realtime]
+
+# Allowed: realtimeapi | avas
+# Optional; default: unset
+architecture = "realtimeapi"
 
 # Allowed: webrtc | websocket
 # Optional; default: unset
@@ -2489,6 +2506,9 @@ sandbox = "elevated"
 # # request_rule = false
 #
 # # Optional; default: unset
+# # resize_all_images = false
+#
+# # Optional; default: unset
 # # responses_websockets = false
 #
 # # Optional; default: unset
@@ -2499,6 +2519,9 @@ sandbox = "elevated"
 #
 # # Optional; default: unset
 # # search_tool = false
+#
+# # Optional; default: unset
+# # secret_auth_storage = false
 #
 # # Optional; default: unset
 # # shell_snapshot = false
@@ -2532,6 +2555,9 @@ sandbox = "elevated"
 #
 # # Optional; default: unset
 # # terminal_visualization_instructions = false
+#
+# # Optional; default: unset
+# # token_budget = false
 #
 # # Optional; default: unset
 # # tool_call_mcp_elicitation = false
