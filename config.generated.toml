@@ -545,6 +545,9 @@ web_search = "disabled"
 # skill_mcp_dependency_install = false
 
 # Optional; default: unset
+# sleep_tool = false
+
+# Optional; default: unset
 # sqlite = false
 
 # Optional; default: unset
@@ -2537,6 +2540,9 @@ sandbox = "elevated"
 #
 # # Optional; default: unset
 # # skill_mcp_dependency_install = false
+#
+# # Optional; default: unset
+# # sleep_tool = false
 #
 # # Optional; default: unset
 # # sqlite = false
