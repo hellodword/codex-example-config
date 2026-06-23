@@ -263,8 +263,8 @@ sandbox_mode = "read-only"
 # Optional; default: unset
 # tool_output_token_limit = 0
 
-# Controls the web search tool mode: disabled, cached, or live.
-# Allowed: disabled | cached | live
+# Controls the web search tool mode: disabled, cached, indexed, or live.
+# Allowed: disabled | cached | indexed | live
 # Optional; default: unset
 web_search = "disabled"
 
@@ -353,13 +353,13 @@ web_search = "disabled"
 # auth_elicitation = false
 
 # Optional; default: unset
+# auto_compaction = false
+
+# Optional; default: unset
 # browser_use = false
 
 # Optional; default: unset
 # browser_use_external = false
-
-# Optional; default: unset
-# child_agents_md = false
 
 # Optional; default: unset
 # chronicle = false
@@ -389,7 +389,13 @@ web_search = "disabled"
 # connectors = false
 
 # Optional; default: unset
+# current_time_reminder = false
+
+# Optional; default: unset
 # default_mode_request_user_input = false
+
+# Optional; default: unset
+# deferred_executor = false
 
 # Optional; default: unset
 # elevated_windows_sandbox = false
@@ -443,6 +449,9 @@ web_search = "disabled"
 # in_app_browser = false
 
 # Optional; default: unset
+# item_ids = false
+
+# Optional; default: unset
 # js_repl = false
 
 # Optional; default: unset
@@ -462,6 +471,9 @@ web_search = "disabled"
 
 # Optional; default: unset
 # multi_agent = false
+
+# Optional; default: unset
+# multi_agent_mode = false
 
 # Optional; default: unset
 # multi_agent_v2 = false
@@ -515,10 +527,16 @@ web_search = "disabled"
 # resize_all_images = false
 
 # Optional; default: unset
+# respect_system_proxy = false
+
+# Optional; default: unset
 # responses_websockets = false
 
 # Optional; default: unset
 # responses_websockets_v2 = false
+
+# Optional; default: unset
+# rollout_budget = false
 
 # Optional; default: unset
 # runtime_metrics = false
@@ -594,6 +612,9 @@ web_search = "disabled"
 
 # Optional; default: unset
 # unified_exec_zsh_fork = false
+
+# Optional; default: unset
+# use_agent_identity = false
 
 # Optional; default: unset
 # use_legacy_landlock = false
@@ -1077,6 +1098,27 @@ persistence = "save-all"
 # [notice.model_migrations]
 #
 
+# Orchestrator-owned feature settings.
+# Optional; default: unset
+# [orchestrator]
+
+# # Settings for a feature owned by the orchestrator.
+# # Optional; default: unset
+# # [orchestrator.mcp]
+#
+# # # Optional; default: unset
+# # # enabled = false
+# #
+#
+# # Settings for a feature owned by the orchestrator.
+# # Optional; default: unset
+# # [orchestrator.skills]
+#
+# # # Optional; default: unset
+# # # enabled = false
+# #
+#
+
 # OTEL configuration.
 # Optional; default: unset
 # [otel]
@@ -1123,10 +1165,6 @@ persistence = "save-all"
 # Experimental / do not use. Realtime websocket session selection. `version` controls v1/v2 and `type` controls conversational/transcription.
 # Default: None
 [realtime]
-
-# Allowed: realtimeapi | avas
-# Optional; default: unset
-architecture = "realtimeapi"
 
 # Allowed: webrtc | websocket
 # Optional; default: unset
@@ -2317,7 +2355,7 @@ sandbox = "elevated"
 # # Optional; default: unset
 # # service_tier = "example"
 #
-# # Allowed: disabled | cached | live
+# # Allowed: disabled | cached | indexed | live
 # # Optional; default: unset
 # web_search = "disabled"
 #
@@ -2350,13 +2388,13 @@ sandbox = "elevated"
 # # auth_elicitation = false
 #
 # # Optional; default: unset
+# # auto_compaction = false
+#
+# # Optional; default: unset
 # # browser_use = false
 #
 # # Optional; default: unset
 # # browser_use_external = false
-#
-# # Optional; default: unset
-# # child_agents_md = false
 #
 # # Optional; default: unset
 # # chronicle = false
@@ -2386,7 +2424,13 @@ sandbox = "elevated"
 # # connectors = false
 #
 # # Optional; default: unset
+# # current_time_reminder = false
+#
+# # Optional; default: unset
 # # default_mode_request_user_input = false
+#
+# # Optional; default: unset
+# # deferred_executor = false
 #
 # # Optional; default: unset
 # # elevated_windows_sandbox = false
@@ -2440,6 +2484,9 @@ sandbox = "elevated"
 # # in_app_browser = false
 #
 # # Optional; default: unset
+# # item_ids = false
+#
+# # Optional; default: unset
 # # js_repl = false
 #
 # # Optional; default: unset
@@ -2459,6 +2506,9 @@ sandbox = "elevated"
 #
 # # Optional; default: unset
 # # multi_agent = false
+#
+# # Optional; default: unset
+# # multi_agent_mode = false
 #
 # # Optional; default: unset
 # # multi_agent_v2 = false
@@ -2512,10 +2562,16 @@ sandbox = "elevated"
 # # resize_all_images = false
 #
 # # Optional; default: unset
+# # respect_system_proxy = false
+#
+# # Optional; default: unset
 # # responses_websockets = false
 #
 # # Optional; default: unset
 # # responses_websockets_v2 = false
+#
+# # Optional; default: unset
+# # rollout_budget = false
 #
 # # Optional; default: unset
 # # runtime_metrics = false
@@ -2591,6 +2647,9 @@ sandbox = "elevated"
 #
 # # Optional; default: unset
 # # unified_exec_zsh_fork = false
+#
+# # Optional; default: unset
+# # use_agent_identity = false
 #
 # # Optional; default: unset
 # # use_legacy_landlock = false
